@@ -1,17 +1,17 @@
 import discord
 from discord.ext import commands
 import config
-import database
+from database import Database
 import random
 
 description = '''Here are the following commands available.'''
 
 intents = discord.Intents.default()
+intents.message_content = True
 intents.members = True
 
 bot = commands.Bot(command_prefix=config.c.prefix, description=description, intents=intents)
-
-DB = database.DBClient(config.c.db_host,config.c.db_username,config.c.db_password)
+DB = Database(config.c.db_host,config.c.db_username,config.c.db_password,"br1")
 
 @bot.event
 async def on_ready():
@@ -28,78 +28,66 @@ async def on_member_join(ctx):
 @bot.command()
 async def getusers(ctx):
     await ctx.send(DB.getUsers())
-"""
-@bot.command()
-async def add(ctx, left: int, right: int):
-    await ctx.send(left + right)
-"""
+
 @bot.command()
 async def getuserinfo(ctx):
     userinfo = DB.getUserInfo(ctx.author.id)
-    response = " DiscordID: {0}\nName: {1}\nBalance: {2}\nJoinDate: {3}\nBirthday: {4}".format(userinfo[0],userinfo[1],userinfo[2],userinfo[3],userinfo[4])
+    response = " Name: {0}\nDiscordID: {1}\nGrade: {2}\nJoinDate: {3}\nBirthday: {4}".format(userinfo[1],userinfo[0],userinfo[2],userinfo[4],userinfo[5])
     await ctx.send(response)
+
 
 @bot.command()
 async def adduser(ctx):
-    DB.adduser(ctx.author.id,ctx.author.name)
+    """Adds user to database"""
+    view = Confirm()
+    await ctx.send('Do you want to continue?', view=view)
+    # Wait for the View to stop listening for input...
+    await view.wait()
+    if view.value is None:
+        await ctx.send('Timed out...')
+    elif view.value:
+        if DB.adduser(ctx.author.id, ctx.author.name):
+            await ctx.send('Confirmed... adding user.')
+        else:
+            await ctx.send("User failed to be added to the database.")
+    else:
+        await ctx.send('Cancelled...user was not added.')
+
+@bot.command()
+@commands.is_owner()
+async def reload(ctx, extension):
+    await bot.reload_extension(f"cogs.{extension}")
+    embed = discord.Embed(title='Reloaded', description=f'{extension} successfully reloaded!', color=0xff00c8)
+    await ctx.send(embed=embed)
 
 @bot.command()
 async def setbirthday(ctx,month,day,year):
-    birthday = "{0}-{1}-{2}".format(year,month,day)
-    #await ctx.send(birthday)
+    birthday = "{0}-{1}-{2}".format(month,day,year)
+    await ctx.send(birthday)
     DB.setBirthday(ctx.author.id,birthday)
 
-@bot.command()
-async def getbalance(ctx):
-    balance = DB.getBalance(ctx.author.id)
-    response = "You have {}$".format(balance)
-    await ctx.send(response)
+# Define a simple View that gives us a confirmation menu
+class Confirm(discord.ui.View):
+    def __init__(self):
+        super().__init__()
+        self.value = None
 
-@bot.command()
-async def gamble(ctx,wager:int,bet:str):
-    print(type(wager))
-    print(type(bet))
-    random.seed()
-    roll = random.randint(0,36)
-    even = "even"
-    odd = "odd"
-    if (bet == even and bet % 2 == 0):
-        newbal = 2*wager
-    else:
-        if (bet == odd and bet % 2 > 0):
-            newbal = 2 * wager
-        else:
-            if int(bet) == roll:
-                newbal = 3 * wager
-            else:
-                newbal = -wager;
+    # When the confirm button is pressed, set the inner value to `True` and
+    # stop the View from listening to more input.
+    # We also send the user an ephemeral message that we're confirming their choice.
+    @discord.ui.button(label='Confirm', style=discord.ButtonStyle.green)
+    async def confirm(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message('Confirmed', ephemeral=False)
+        self.value = True
+        self.stop()
 
-    if newbal>0:
-        response = "You won {}$".format(newbal)
-    else:
-        response = "You lost {}$".format(newbal)
-    #DB.updateBalance(ctx.author.id,newbal,"add")
-    await ctx.send(response)
-
-@bot.command()
-async def work(ctx):
-    random.seed()
-    paycheck = random.randint(0,100)
-    DB.updateBalance(ctx.author.id,paycheck,"add")
-    response = "You earned {}$".format(paycheck)
-    await ctx.send(response)
+    # This one is similar to the confirmation button except sets the inner value to `False`
+    @discord.ui.button(label='Cancel', style=discord.ButtonStyle.grey)
+    async def cancel(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message('Cancelled', ephemeral=False)
+        self.value = False
+        self.stop()
 
 
 bot.run(config.c.token)
 
-"""
-class MyClient(discord.Client):
-    async def on_ready(self):
-        print('Logged on as {0}!'.format(self.user))
-
-    async def on_message(self, message):
-        print('Message from {0.author}: {0.content}'.format(message))
-
-client = MyClient()
-client.run(token)
-"""

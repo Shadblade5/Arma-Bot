@@ -3,12 +3,13 @@ import config
 from datetime import datetime
 
 
-class DBClient:
-    def __init__(self, db_host, db_username, db_password):
+class Database:
+    def __init__(self, db_host, db_username, db_password,db_name):
+        print("Connecting to MySQL server...")
         self.client = mysql.connector.connect(host=db_host,
                                               user=db_username,
                                               password=db_password,
-                                              database="pydiscordbot")
+                                              database=db_name)
 
     def executeSQL(self, sql, query=True):
         mycursor = self.client.cursor()
@@ -19,35 +20,23 @@ class DBClient:
         return myresult
 
     def getUsers(self):
-        sql = "SELECT * FROM users"
+        sql = "SELECT * FROM master"
         return self.executeSQL(sql)
 
     def getUserInfo(self, DiscordID):
-        sql = 'SELECT * FROM users WHERE DISCORDID = {}'.format(DiscordID)
+        sql = 'SELECT * FROM master WHERE DISCORDID = {}'.format(DiscordID)
         return self.executeSQL(sql)[0]
 
     def adduser(self, DiscordID, DiscordName):
         now = datetime.now()
         dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
-        sql = "INSERT INTO `users` VALUES ('{0}','{1}','0','{2}','NULL');".format(DiscordID, DiscordName, dt_string)
-        self.executeSQL(sql, False)
+        sql = "INSERT INTO `master` VALUES ('{0}','{1}','0','0','{2}','NULL');".format(DiscordID,DiscordName,dt_string)
+        try:
+            self.executeSQL(sql, False)
+        except mysql.connector.IntegrityError:
+            return False
+        return True
 
     def setBirthday(self, DiscordID, birthday):
-        sql = "UPDATE `users` SET `Birthday` = '{0}' WHERE DISCORDID = '{1}'".format(birthday, DiscordID)
+        sql = "UPDATE `master` SET `Birthday` = '{0}' WHERE DISCORDID = '{1}'".format(birthday, DiscordID)
         self.executeSQL(sql, False)
-
-    def updateBalance(self, DiscordID, value: int, option=""):
-        balance = 0;
-        if option == "set":
-            balance = value;
-            sql = "UPDATE `users` SET `Balance` = {0} WHERE DISCORDID = {1}".format(value, DiscordID)
-        else:
-            sql = "SELECT Balance FROM users WHERE DISCORDID = {0}".format(DiscordID)
-            balance = self.getBalance(DiscordID)
-            balance = balance + value
-            sql = "UPDATE `users` SET `Balance` = {0} WHERE DISCORDID = {1}".format(balance, DiscordID)
-            self.executeSQL(sql, False)
-
-    def getBalance(self, DiscordID):
-        sql = "SELECT Balance FROM users WHERE DISCORDID = {0}".format(DiscordID)
-        return self.executeSQL(sql)[0][0]
