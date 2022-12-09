@@ -1,0 +1,42 @@
+**2.1 Team Work**
+Work as a team and follow the in-game chain of command. Players may ask questions if orders are not easily understood or do not make sense provided there is time to do so and the question is asked somewhat respectfully. Players may also suggest courses of action which they feel may be beneficial to in-game leadership if they do so somewhat respectfully.
+
+**2.2 Trolling Griefing**
+Do not troll grief in-game. This includes, but is not limited to, intentionally team killing or taking any action which is disruptive, malicious, annoying, etc. and would negatively impact the experience of other players.
+
+**2.3 Role Playing**
+Play any operation as if you are the character which you are playing and as if you are in mortal peril. Do not break the fourth wall and try to immerse yourself as if you are in the situation your character is.
+
+**2.4 In Game Text Channels**
+Do not use in-game text channels unless you are communicating a technical malfunction of the server, and or game engine to the operation designer or designated Zeus, or must leave the operation due to a real-life situation.
+
+**2.5 Rage Quitting**
+Do not quit an operation out of frustration. Provide feedback via the appropriate form to the operation designer once the operation has completed to help the designer improve your experience. Avoid openly complaining during operations and do not make comments and or take actions which negatively impact other people’s enjoyment.
+
+**2.6 Arma III and Teamspeak Profile Names**
+Arma III and Teamspeak 3 profile names must be the same or a similar facsimile of their Discord profile names following the guidelines of CoC 1.8. Campaigns may dictate that a player uses a different profile name for roleplaying purposes.
+
+**2.7 Player Profile: in-game Unit**
+Only join this Unit’s operations using this Unit as their active unit, or having no active unit assigned to their ARMA III profile. Units automatically assign a patch to player’s in-game uniforms and a tag at the front of their profile’s name.
+
+**2.8 Campaign Operation Specific Rules**
+Follow any operational specific or campaign specific rules.
+
+**2.9 Non-loadout Enemy Equipment**
+Do not pick up equipment not designated for your slot from allied or enemy corpses, arsenals, weapons stockpiles, etc. Unless otherwise noted in a campaign’s rules, you may pick up battlerifles or SMGs if all of the following conditions are met:
+
+1- you have expended all of your ammunition
+2- there is an immediate need to continue fighting
+3- you have permission from your in-operation chain of command
+4- there is no resupply enroute which would reach you prior to you needing to continue combat
+
+**2.10 Player Participation**
+Members shall own ARMA III and fully participate in at least once operation every three months (4 operations a year minimum). Leaving prior to the conclusion of an operation, or showing up midway through an operation shall not count as fully participation.
+
+**2.11 Player Leaves of Absence**
+Players who have significant life circumstances in which they require a long break, should reach out to a retention admin or a moderator with their circumstances to obtain LOA status. Outside of military deployments, or other extended events (missionary trips, law enforcement academies, study abroad classes, etc.) which would hold the player somewhere where they could not participate for more than 4 months, no player shall be granted more than 26 weeks on LOA per year. Players requiring several LOAs, regardless of reason or total duration of yearly LOA time, within a year shall be asked whether or not they want to continue with the unit and may be kicked from the unit if it is impractical for them to continue with the unit at that time.
+
+**2.12 Operation Communications**
+Do not play music over local voice channels. Follow in-game communications etiquette as described during Basic Combat Training or at the direction of the in-operation Leadership, whichever sets a higher standard.
+
+Operations Designers may choose to play music over direct voice channels, or general radio chatter audio files over radio channels provided it does not breach any other CoC and is approved during a Quality Assurance Review.

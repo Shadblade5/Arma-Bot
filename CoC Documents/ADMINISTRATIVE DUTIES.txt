@@ -1,0 +1,77 @@
+**5.1    Administrator**
+```The Administrator is the unit leader and is responsible for overseeing the entire unit in every facet.
+```
+**5.2    Assistant Administrator**
+```Assistant Administrator assist the Administrator in whatever way is asked of them. May act as the administrator in the event of the administrator’s absence during a situation which requires timely resolution. May act as interim lead Moderator, Operation’s Designer, Quality Assurance Admin and Retention Admin until the position has been filled.
+```
+**5.3    Moderator**
+```Moderators are responsible for judiciary actions within the unit in accordance with section 6 of the CoC. They moderate community conduct both in operations and the discord and may, with due cause, kick members in significant violation of the CoC. Moderators also issue LOA status in accordance with section 2.11 of the CoC.
+
+The Lead Moderator is responsible for reviewing other moderator’s actions, participating in Admin Meetings and leading Moderator meetings.
+```
+**5.4     Operation Designers**
+```Operations designers are responsible for campaign/operation development, operational/campaign compliance with CoC section 3, running operations in-game via the Zeus module, and developing campaign modlists for campaigns they run. They are accountable to administrator and QA Admins.
+
+The three levels of Operation designers are as follows:
+1.    Tentative Operation Designer – A member who is in an admittance process to become an Operation Designer.
+2.    Operation Designer – A member who has passed a minimum of 4 Quality Assurance Reviews on operations and has successfully created and ran a well-received campaign of at least 4 operations while under observation by the Lead Operation Designer or designee.
+3.    Lead Operation Designer – An admin responsible for overseeing other Operation Designers, scheduling campaigns/operations, meeting with QA and Retention Admins to ensure quality operation designs/good feedback from players. May have additional duties not listed as assigned by the Administrator.
+```
+**5.5 Quality Assurance Admins**
+```QA Admins are responsible for overseeing campaign development and operational compliance with CoC section 3. They administrate Quality Review Checks on all campaigns, modlists, and Operations. Works with Operation Designers and Retention Admins to ensure player satisfaction.
+Lead QA Admin is responsible for attending Admin Meetings and running QA Meetings.
+```
+**5.6 Retention Admins**
+```Retention Admins are responsible for recruiting and player engrossment within the unit. Works with QA Admins and Moderators to ensure player satisfaction and CoC mandated participation. Posts recruitment posts using official Unit accounts on various websites. Reviews Feedback forms and notifies QA Admins and responsible Operation Designers of significant player enjoyment/criticisms. Reaches out to inactive players and determines whether a player needs an LOA status or referral to moderator for removal from the unit.
+
+Lead Retention Admin is responsible for attending Admin Meetings, running Retention Meetings, ensuring that recruitment posts are made at regular weekly intervals, and other duties as assigned. May delegate tasks to other Retention Admins.
+```
+**5.7 Media Admin**
+```The Media Admin is responsible for collecting in-game footage from various sources, compiling the footage, and posting on the Unit’s YouTube channel. May seek assistance from any member not already engaged with other Administrative Duties (not including training). Will forward any footage found of CoC violations to a Moderator for review.
+```
+**5.8 Training Administrator**
+```Trainers are technical admins responsible for creating training documentation, planning trainings, and running trainings for one of the following unit certification programs:
+
+Basic Combat Certification
+Advanced Combat Certification
+Anti-Tank Infantry Certification
+Leadership Certification
+Medical Certification
+Demolitions Certification
+Transportation Certification
+
+```Lead Trainers are responsible for ensuring that certified members are given access to appropriate documentation, are receiving high quality training which fully prepares them for the role, ensuring that certified members are recertified after not participating in their certified role for 6 months prior to being allowed to participate in that role, approving members to be certified trainers for the program which the Lead Trainer is in charge, and other duties as assigned. May participate in Admin meetings and may run meetings for their specific trainers.
+```
+**5.8.1 BCC**
+```Basic Combat Certification is to include how to operate rifles, hand grenades, autorifles, and light machine guns and how the associated equipment is effectively incorporated within a platoon/squad/team/other player element not listed. It shall also include basic radio, map marking, team communication, and in-operation etiquette as well as MOUT, basic infantry tactics, expectations on how to move with a player element, and how to use basic unit mods (ACE, ACRE, Enhanced Movement, etc.). Required for all players.
+```
+**5.8.2 ACC**
+```Advanced Combat Certification is to include how to operate Marksman Rifles, Grenade Launchers, and deployable weapons and how the associated equipment is effectively incorporated within a player element. It shall also include how ranging with and without a rangefinder, and effective marking and illumination with smoke and flare rounds.
+```
+**5.8.3 Leadership**
+```Leadership Certification shall include long range radio communications, how and when to call support (artillery, CAS, Medivac, etc.), Platoon/squad/team tactics and organization, how to reorganize during a crisis situation, and leadership expectations including how to address CoC violations observed by team members in operation.
+```
+**5.8.4 Transportation**
+```Transportation Certification shall include how to safely operate a vehicle for logistical needs, how to repair vehicles, and other responsibilities to be discussed.
+```
+**5.8.5 Other Certification Programs**
+```Anti-Tank, Demolitions, and Medical Certification Programs are to train on proper use of certification locked equipment, role responsibilities, and how the role is to incorporate itself within a player element.
+```
+**5.8.6 Trainer Restrictions**
+```Outside of an temporary need, no member shall be allowed to be a trainer or lead trainer for more than one certification program. Trainers may choose to swap to another training program provided there is a need but will forfeit their trainer status with the original program.
+```
+**5.9 Admin Restrictions**
+```No member shall hold more than one Admin Position unless there is an immediate need for the position to be filled with no one able to fill it. In these circumstances, a member may temporarily fill multiple Admin positions but the vacant positions.
+
+This section is not intended to prohibit an Admin from being a Trainer or Lead Trainer (as described in Section 5.8) and specifically prohibits a member from holding more than one of the following positions at the same time on a permanent basis:
+
+Assistant Administrator
+Operation Designer
+Quality Assurance Admin
+Retention Admin
+Media Admin
+
+Additionally, should an Operation Designer be taking over a Quality Assurance Admin (or vice versa) temporarily due to need, that Operation Designer may not conduct a Quality Assurance Review on their own operations/campaigns and must reach out to The Administrator.
+```
+**5.9.1 Moderator Exception**
+```Members may be a Moderator as well as another Admin.```

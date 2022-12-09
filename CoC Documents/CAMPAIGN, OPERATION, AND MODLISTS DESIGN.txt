@@ -1,0 +1,36 @@
+**3.1 Operation Design Standard**
+```Operations are to be designed to be immersive, narrative based experiences. Operation Designers are expected to create various operations which create a realistic atmosphere and submit operations for quality review, prior to playing, to ensure the following:
+
+a.    If used, arsenals have the basic equipment needed for each role within the operation.
+b.    If used, arsenals do not contain unnecessary equipment such as out of place cosmetic wear, novelty ammunition, too many ammunition types per weapon (more than 3 different STANAG magazines from multiple mods), novelty weapons (weapons without purpose/out of place cosmetically), etc.
+c.    Players have access to necessary equipment in some form; either arsenals or some other creative means.
+d.    Initial spawn points have been set up correctly; either respawn positions with associated settings or AI slots.
+e.    All mission specific multiplayer settings have been set up correctly in Eden.
+f.    An in-operation full squad briefing has been completed using ACE Slideshow or some other means to display intelligence and objectives on a screen or board.
+g.    The operation designer has completed a full plan for the operation in a word doc.
+h.    All necessary scripts have been added to the mission file.
+i.    The mission has been designed to be immersive using objects, effects, and scripts.
+j.    The mission has a comprehensible narrative.
+k.    The mission plays stable on the server.
+```
+**3.2 Campaigns**
+```Campaigns will have a minimum of four operations which are connected by a comprehensive and engaging singular narrative. Campaigns will be fully completed and submitted for quality review in compliance with 3.1 prior to them being announced for signups. New campaigns may build upon the story of past campaigns.
+```
+**3.3 Campaign Design Standard **
+```Campaign rules are decided upon by the operation designer using the following standards:
+a.    Campaigns will run no more than once a week and a least once a month.
+b.    Operation designer may create a modpack for campaigns provided the modpack is submitted for review using guidelines in 3.6.
+c.    Campaigns may be in any setting provided there is an interested playerbase which can fill out at least a squad sized element and the needed mods are in compliance with 3.6.
+d.    A sign-up process must be designed in which players submit interest for multiple slots.
+e.    Stamina will be enabled.
+f.    Crosshairs will be disabled.
+g.    Campaign signups will be for the entirety of the campaign (i.e. slots are locked after sign-up). Players, especially players on an approved LOA status, should be allowed to be absent for no more than 25% of the scheduled operations. Players can be added to or dropped from the campaign as it progresses so long as there is a story explanation for the gain and/or loss.
+h.    All operations for the campaign will be scheduled prior to the announcement.
+i.    Operation designer may choose to allow third person or make the campaign first person only.
+j.    Any slot, as defined in section 4 (CAMPAIGN AND OPERATION SIGNUP), may be used in the squad or platoon layout. Operation designers may modify slots to accommodate period specific equipment (i.e. SMG Operators in WW2).
+k.    Campaigns will be roleplaying focused. The operation designer may choose to have the players make specific characters with backstories, or may assign characters to players and allow players to use their Discord monikers as callsigns.
+l.    Operation designers may allow for respawns during operations however, there must be a low limit (1 per player total count max) to the amount of respawns available; the player must be assigned or create a new character prior to the start of the next campaign operation.
+m.    Operation designers must have a military rank system incorporated into the slots to create an in-game chain of command. This rank system can be any military rank system which makes sense to the setting of the campaign.
+n.    Campaigns will incorporate appropriate equipment following guidelines in 3.1.b and 3.4.
+o.    Other miscellaneous rules not discussed above can be reviewed and approved by a quality assurance admin.
+ ```
