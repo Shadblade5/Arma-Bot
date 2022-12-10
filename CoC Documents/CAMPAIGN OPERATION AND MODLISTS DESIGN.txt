@@ -2,7 +2,7 @@
 ```Operations are to be designed to be immersive, narrative based experiences. Operation Designers are expected to create various operations which create a realistic atmosphere and submit operations for quality review, prior to playing, to ensure the following:
 
 a.    If used, arsenals have the basic equipment needed for each role within the operation.
-b.    If used, arsenals do not contain unnecessary equipment such as out of place cosmetic wear, novelty ammunition, too many ammunition types per weapon (more than 3 different STANAG magazines from multiple mods), novelty weapons (weapons without purpose/out of place cosmetically), etc.
+b.    If used, arsenals do not contain unnecessary equipment such as out of place cosmetic wear, novelty ammunition, too many ammunition types per weapon (more than 3 different STANAG magazines from multiple mods), novelty weapons (weapons without purpose or out of place cosmetically), etc.
 c.    Players have access to necessary equipment in some form; either arsenals or some other creative means.
 d.    Initial spawn points have been set up correctly; either respawn positions with associated settings or AI slots.
 e.    All mission specific multiplayer settings have been set up correctly in Eden.
@@ -24,7 +24,7 @@ c.    Campaigns may be in any setting provided there is an interested playerbase
 d.    A sign-up process must be designed in which players submit interest for multiple slots.
 e.    Stamina will be enabled.
 f.    Crosshairs will be disabled.
-g.    Campaign signups will be for the entirety of the campaign (i.e. slots are locked after sign-up). Players, especially players on an approved LOA status, should be allowed to be absent for no more than 25% of the scheduled operations. Players can be added to or dropped from the campaign as it progresses so long as there is a story explanation for the gain and/or loss.
+g.    Campaign signups will be for the entirety of the campaign (i.e. slots are locked after sign-up). Players, especially players on an approved LOA status, should be allowed to be absent for no more than 25% of the scheduled operations. Players can be added to or dropped from the campaign as it progresses so long as there is a story explanation for the gain and or loss.
 h.    All operations for the campaign will be scheduled prior to the announcement.
 i.    Operation designer may choose to allow third person or make the campaign first person only.
 j.    Any slot, as defined in section 4 (CAMPAIGN AND OPERATION SIGNUP), may be used in the squad or platoon layout. Operation designers may modify slots to accommodate period specific equipment (i.e. SMG Operators in WW2).

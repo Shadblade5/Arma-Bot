@@ -57,7 +57,9 @@ class Database:
             return False
         else:
             return True
-
+    async def getcoc(self):
+        sql = "SELECT * FROM coc"
+        return await self.executeSQL(sql)
 
 
     async def setBirthday(self, DiscordID, birthday):

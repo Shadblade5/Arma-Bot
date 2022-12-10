@@ -79,29 +79,36 @@ async def id(ctx, *args):
 @bot.command()
 async def createcoc(ctx):
     channel = bot.get_channel(1049510076945281086)
-    dir = "./CoC Documents/"
-    f1 = open("./CoC Documents/PREAMBLE.txt", "r")
-    em = discord.Embed()
-    em.title = "PREAMBLE"
-    em.description = f1.read()
-    f1.close()
-    await ctx.send(embed=em)
+    coc = await DB.getcoc()
 
-    for x in ["DEFINITIONS",
-              "GENERAL CONDUCT",
-              "OPERATIONAL CONDUCT",
-              "CAMPAIGN, OPERATION, AND MODLISTS DESIGN",
-              "CAMPAIGN AND OPERATION SIGNUP",
-              "ADMINISTRATIVE DUTIES",
-              "DISCIPLINE"
-              ]:
-        message = await channel.send(content=x)
-        thread = await message.create_thread(name=x)
-        em2 = discord.Embed()
-        f2 = open(dir + x+".txt", "r")
-        em2.description = f2.read()
-        f2.close()
-        await thread.send(embed=em2)
+    print(coc)
+
+
+
+
+    # dir = "./CoC Documents/"
+    # f1 = open("./CoC Documents/PREAMBLE.txt", "r")
+    # em = discord.Embed()
+    # em.title = "PREAMBLE"
+    # em.description = f1.read()
+    # f1.close()
+    # await ctx.send(embed=em)
+    #
+    # for x in ["DEFINITIONS",
+    #           "GENERAL CONDUCT",
+    #           # "OPERATIONAL CONDUCT",
+    #           # "CAMPAIGN OPERATION AND MODLISTS DESIGN",
+    #           # "CAMPAIGN AND OPERATION SIGNUP",
+    #           # "ADMINISTRATIVE DUTIES",
+    #           # "DISCIPLINE"
+    #           ]:
+    #     message = await channel.send(content=x)
+    #     thread = await message.create_thread(name=x)
+    #     em2 = discord.Embed()
+    #     f2 = open(dir + x+".txt", "r")
+    #     em2.description = f2.read()
+    #     f2.close()
+    #     await thread.send(embed=em2)
 
 @bot.command()
 @commands.has_any_role('Officer', 'Admin-NCO','Senior-NCO')
