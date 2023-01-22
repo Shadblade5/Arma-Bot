@@ -13,11 +13,12 @@ class Database:
 
     async def executeSQL(self, sql, query=True):
         try:
+            print("Connecting to MYSQL...")
             client = MYSQL.connect(host     =self.db_host,
                                    user     =self.db_username,
                                    password =self.db_password,
                                    database =self.db_name)
-            print("Connected to MYSQL")
+            print("Connected.")
             mycursor = client.cursor()
             mycursor.execute(sql)
             if query==True:
@@ -27,10 +28,12 @@ class Database:
                 print("Commiting")
                 client.commit()
         except MYSQL.InterfaceError as err:
-            print(err)
-            retries += 1
-            if(retries<60):
-                self.executeSQL()
+            self.retries += 1
+            print('Failed to connect,attempt #{}. Retrying...'.format(self.retries))
+            if(self.retries<60):
+                return await self.executeSQL(sql,query)
+            else:
+                print("Server unresponsive.")
         except MYSQL.IntegrityError as e:
             print(e)
             return 1

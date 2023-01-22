@@ -1,11 +1,16 @@
 import discord
 from discord.ext import commands
+from discord.ext import tasks
 import config
 from database import Database
 import random
 import datetime
 import pytz
 import time
+from wakeonlan import send_magic_packet
+
+
+
 
 description = '''Here are the following commands available.'''
 
@@ -23,7 +28,6 @@ async def on_ready():
     print(output)
     print('-'*len(output))
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the server burn"))
-
 
 async def playerlogger(ctx):
     channel = bot.get_channel(1049510076945281086)
@@ -56,59 +60,118 @@ async def getuserinfo(ctx):
     await message.edit(content="Name: {0}\nDiscordID: {1}\nGrade: {2}\nJoinDate: {3}\nBirthday: {4}"
                    .format(userinfo[1],userinfo[0],userinfo[2],userinfo[4],userinfo[5]))
 
-@bot.command()
-async def id(ctx, *args):
+# @bot.command()
+# async def id(ctx, *args):
     # targetusers.append(user.id for user in ctx.message.mentions
     # test = "208119044308467712"
     # for x in "<@>":
     #     test = test.replace(x,"")
     # print(test)
     # if len(args)>1:
-    targetUsers = []
-    print(args)
-    for x in args:
-        for y in "<@>&":
-            x = x.replace(y,"")
-        targetUsers.append(x)
-    print(targetUsers)
+    # targetUsers = []
+    # # print(args)
+    # for x in args:
+    #     for y in "<@>&":
+    #         x = x.replace(y,"")
+    #     targetUsers.append(x)
+    # print(targetUsers)
 
 # @bot.command()
 # async def updateCoC(ctx):
 #     channel = bot.get_channel(1050527640848695296)
 
+class COC:
+    em = 0
+    thread = 0
+    def __init__(self,code):
+        self.Section = code[0]
+        self.Subsection = code[1]
+        self.Item = code[2]
+        self.Title = code[3]
+        self.Description = code[4]
+
+
 @bot.command()
 async def createcoc(ctx):
-    channel = bot.get_channel(1049510076945281086)
+    channel = bot.get_channel(1053239585838215229) #new-code-of-conduct
+    print("Getting COC DATA")
+    threads = []
     coc = await DB.getcoc()
+    # sorted_coc = sorted(
+    #     coc,
+    #     key=lambda t: (t[0], t[1], t[2])
+    # )
+    for code in coc:
+        # print('{}.{}.{} {}'.format(*code))
 
-    print(coc)
+        current_code = COC(list(code))
+        # print(f'Current: {current_code.Section}.{current_code.Subsection}.{current_code.Item}')
+
+        if (current_code.Section==0):
+            if(current_code.Subsection==0):
+                current_code.em = discord.Embed()
+                current_code.em.title = current_code.Title
+                current_code.em.description = current_code.Description
+                await channel.send(embed=current_code.em)
+            else:
+                if(current_code.Item==0):
+                    message = await channel.send(embed=discord.Embed(title=current_code.Title))
+                    definitions_thread = await message.create_thread(name=current_code.Title)
+                else:
+                    await definitions_thread.send(embed=discord.Embed(title=current_code.Title,description=current_code.Description))
+        else:
+            if(current_code.Subsection==0):
+                message = await channel.send(embed=discord.Embed(title=f'{current_code.Section}.{current_code.Subsection}.{current_code.Item} {current_code.Title}'))
+                current_thread = await message.create_thread(name=current_code.Title)
+            else:
+                if current_code.Item==0:
+                    current_code.em = discord.Embed()
+                    current_code.em.title = f'{current_code.Section}.{current_code.Subsection}.{current_code.Item} {current_code.Title}'
+                    current_code.em.description = current_code.Description
+                    if current_code.Subsection > 1:
+                        await current_thread.send(embed=last_code.em)
+                else:
+                    current_code.em = last_code.em
+                    current_code.em.add_field(name=current_code.Title, value=current_code.Description,inline=False)
+
+        last_code = current_code
+
+@bot.command()
+@commands.has_any_role('Officer','Admin-NCO')
+async def startserver(ctx):
+    await ctx.send("Starting server...")
+    send_magic_packet('E0-D5-5E-28-75-DE')
+
+@bot.command()
+@commands.has_any_role('Officer')
+@commands.after_invoke(playerlogger)
+async def rankup(ctx, member: discord.Member):
+    myguild = ctx.guild
+    guildroles = await myguild.fetch_roles()
+    memberRoles = member.roles
+    oldGrade = "none"
+    for role in memberRoles:
+        if("Unit Grade" in role.name):
+            oldRole = role
+            oldGrade = role.name
+            oldgradeNumber = [int(i) for i in oldGrade.split() if i.isdigit()][0]
+            oldGradeID = role.id
+    if(oldGrade == "none"):
+        await ctx.send("Error! {} doesn't have a unit grade".format(member.name))
+    else:
+        # oldRole = discord.utils.get(ctx.guild.roles, name="Unit Grade {}".format(oldgradeNumber))
+        newRole = discord.utils.get(ctx.guild.roles, name="Unit Grade {}".format(oldgradeNumber+1))
+
+        await member.add_roles(newRole,reason="Rankup")
+        await member.remove_roles(oldRole,reason="Rankup")
+
+        await ctx.send("{} ranked up to Unit Grade {}".format(member.name,oldgradeNumber+1))
 
 
 
 
-    # dir = "./CoC Documents/"
-    # f1 = open("./CoC Documents/PREAMBLE.txt", "r")
-    # em = discord.Embed()
-    # em.title = "PREAMBLE"
-    # em.description = f1.read()
-    # f1.close()
-    # await ctx.send(embed=em)
-    #
-    # for x in ["DEFINITIONS",
-    #           "GENERAL CONDUCT",
-    #           # "OPERATIONAL CONDUCT",
-    #           # "CAMPAIGN OPERATION AND MODLISTS DESIGN",
-    #           # "CAMPAIGN AND OPERATION SIGNUP",
-    #           # "ADMINISTRATIVE DUTIES",
-    #           # "DISCIPLINE"
-    #           ]:
-    #     message = await channel.send(content=x)
-    #     thread = await message.create_thread(name=x)
-    #     em2 = discord.Embed()
-    #     f2 = open(dir + x+".txt", "r")
-    #     em2.description = f2.read()
-    #     f2.close()
-    #     await thread.send(embed=em2)
+
+
 
 @bot.command()
 @commands.has_any_role('Officer', 'Admin-NCO','Senior-NCO')
@@ -118,18 +181,18 @@ async def createcoc(ctx):
 async def adduser(ctx,*args):
     """Adds user to the database"""
     view = Confirm()
-    await ctx.send('Confirmation to add {} to the database', view=view)
+    await ctx.send('Confirmation to add {} to the database'.format(args[0]), view=view)
     # Wait for the View to stop listening for input...
     await view.wait()
     if view.value is None:
         await ctx.send('Timed out...')
     elif view.value:
         if (await DB.adduser(ctx.author.id, ctx.author.name)):
-            await ctx.send('Confirmed, adding user...')
+            await ctx.send('Confirmed, adding {} to the database...'.format(args[0]))
         else:
-            await ctx.send("User already exists in the database.")
+            await ctx.send("{} already exists in the database.".format(args[0]))
     else:
-        await ctx.send('Cancelled...user was not added.')
+        await ctx.send('Cancelled...{} was not added.'.format(args[0]))
 
 @bot.command()
 @commands.is_owner()
