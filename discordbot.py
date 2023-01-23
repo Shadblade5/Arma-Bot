@@ -12,7 +12,7 @@ import sys
 from wakeonlan import send_magic_packet
 
 description = '''Here are the following commands available.'''
-
+botlogchannel = 1066975056024064032
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
@@ -29,7 +29,7 @@ async def on_ready():
     print('-' * len(output))
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the server burn"))
     # checkforrestart.start()
-    await bot.get_channel(1049510076945281086).send("Bot started.")
+    await bot.get_channel(botlogchannel).send("Bot started.")
 
 async def playerlogger(ctx):
     timestamp = ctx.message.created_at.astimezone(pytz.timezone('US/Eastern'))
@@ -44,7 +44,7 @@ async def playerlogger(ctx):
         em.add_field(name="Arguments", value=Args[1], inline=False)
     em.set_footer(text="{}".format(timestamp.strftime("%Y-%m-%d at %I:%M:%S %p %Z")))
     em.colour = discord.Colour.blue()
-    await bot.get_channel(1049510076945281086).send(embed=em)
+    await bot.get_channel(botlogchannel).send(embed=em)
 
 
 @bot.event
@@ -155,7 +155,7 @@ async def startserver(ctx):
 @commands.is_owner()
 async def restartbot(ctx):
     await ctx.send("Bot restarting...")
-    await bot.get_channel(1049510076945281086).send("Bot restarting...")
+    await bot.get_channel(botlogchannel).send("Bot restarting...")
     os.execv(sys.executable, ['python'] + sys.argv)
     sys.exit()
 
