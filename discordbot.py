@@ -7,6 +7,8 @@ import random
 import datetime
 import pytz
 import time
+import os
+import sys
 from wakeonlan import send_magic_packet
 
 description = '''Here are the following commands available.'''
@@ -26,7 +28,7 @@ async def on_ready():
     print(output)
     print('-' * len(output))
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the server burn"))
-
+    checkforrestart.start()
 
 async def playerlogger(ctx):
     channel = bot.get_channel(1049510076945281086)
@@ -148,6 +150,19 @@ async def createcoc(ctx):
 async def startserver(ctx):
     await ctx.send("Starting server...")
     send_magic_packet('E0-D5-5E-28-75-DE')
+
+@tasks.loop(minutes=1)
+async def checkforrestart():
+    f = open("restartflag.txt","r")
+    if(f.readline(1) == "1"):
+        f.close()
+        f = open("restartflag.txt","w")
+        f.write("0")
+        f.close()
+        print("Restarting....")
+        os.execv(sys.executable, ['python'] + sys.argv)
+        sys.exit()
+
 
 
 @bot.command()
