@@ -10,6 +10,6 @@ class ConfigClass:
         self.db_password = db_password
 
 
-with open('../../../../config.json') as f:
+with open('config.json') as f:
     data = json.load(f)
     c = ConfigClass(data["TOKEN"], data["PREFIX"], data["DBHOST"], data["DBUSERNAME"], data["DBPASS"])
