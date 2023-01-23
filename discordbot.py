@@ -9,9 +9,6 @@ import pytz
 import time
 from wakeonlan import send_magic_packet
 
-
-
-
 description = '''Here are the following commands available.'''
 
 intents = discord.Intents.default()
