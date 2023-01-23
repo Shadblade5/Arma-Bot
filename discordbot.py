@@ -158,12 +158,7 @@ async def restartbot(ctx):
     await bot.get_channel(1049510076945281086).send("Bot restarting...")
     os.execv(sys.executable, ['python'] + sys.argv)
     sys.exit()
-    # f = open("restartflag.txt","r")
-    # if(f.readline(1) == "1"):
-    #     f.close()
-    #     f = open("restartflag.txt","w")
-    #     f.write("0")
-    #     f.close()
+
 
 @bot.command()
 @commands.has_any_role('Officer','Director',"Assistant Director")
