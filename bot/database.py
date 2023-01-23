@@ -1,5 +1,4 @@
 import mysql.connector as MYSQL
-import config
 from datetime import datetime
 import pytz
 
@@ -14,38 +13,38 @@ class Database:
 
     async def executeSQL(self, sql, query=True):
         try:
-            print("Connecting to MYSQL...")
+            print('Connecting to MYSQL...')
             client = MYSQL.connect(host=self.db_host,
                                    user=self.db_username,
                                    password=self.db_password,
                                    database=self.db_name)
-            print("Connected.")
+            print('Connected.')
             mycursor = client.cursor()
             mycursor.execute(sql)
             if query:
-                print("Fetching data")
+                print('Fetching data')
                 return mycursor.fetchall()
             else:
-                print("Commiting")
+                print('Commiting')
                 client.commit()
-        except MYSQL.InterfaceError as err:
+        except MYSQL.InterfaceError:
             self.retries += 1
             print('Failed to connect,attempt #{}. Retrying...'.format(self.retries))
             if (self.retries < 60):
                 return await self.executeSQL(sql, query)
             else:
-                print("Server unresponsive.")
+                print('Server unresponsive.')
         except MYSQL.IntegrityError as e:
             print(e)
             return 1
         except MYSQL.errors as e:
             print(e)
         finally:
-            print("Closing connection")
+            print('Closing connection')
             client.close()
 
     async def getUsers(self):
-        sql = "SELECT * FROM master"
+        sql = 'SELECT * FROM master'
         return await self.executeSQL(sql)
 
     async def getUserInfo(self, DiscordID):
@@ -55,7 +54,8 @@ class Database:
 
     async def adduser(self, DiscordID, DiscordName):
         now = datetime.now()
-        dt_string = now.strftime("%Y-%m-%d %H:%M:%S").astimezone(pytz.timezone('US/Eastern'))
+        dt_string = now.strftime(
+            '%Y-%m-%d %H:%M:%S').astimezone(pytz.timezone('US/Eastern'))
         sql = "INSERT INTO `master` VALUES ('{0}','{1}','0','0','{2}','NULL');".format(DiscordID, DiscordName,
                                                                                        dt_string)
         if await self.executeSQL(sql, False) == 1:
@@ -64,14 +64,14 @@ class Database:
             return True
 
     async def getcoc(self):
-        sql = "SELECT * FROM coc"
+        sql = 'SELECT * FROM coc'
         return await self.executeSQL(sql)
 
     async def setBirthday(self, DiscordID, birthday):
-        sql = "UPDATE `master` SET `Birthday` = '{0}' WHERE DISCORDID = '{1}'".format(birthday, DiscordID)
+        sql = "UPDATE `master` SET `Birthday` = '{0}' WHERE DISCORDID = '{1}'".format(
+            birthday, DiscordID)
         try:
             await self.executeSQL(sql, False)
-        except error:
+        except Exception:
             return False
-        else:
-            return True
+        return True
