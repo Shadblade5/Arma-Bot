@@ -18,7 +18,7 @@ intents.message_content = True
 intents.members = True
 
 bot = commands.Bot(command_prefix=config.c.prefix, description=description, intents=intents)
-DB = Database(config.c.db_host, config.c.db_username, config.c.db_password, "br1")
+DB = Database(config.c.db_host, config.c.db_username, config.c.db_password, "arma")
 
 
 @bot.event
@@ -28,10 +28,10 @@ async def on_ready():
     print(output)
     print('-' * len(output))
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the server burn"))
-    checkforrestart.start()
+    # checkforrestart.start()
+    await bot.get_channel(1049510076945281086).send("Bot started.")
 
 async def playerlogger(ctx):
-    channel = bot.get_channel(1049510076945281086)
     timestamp = ctx.message.created_at.astimezone(pytz.timezone('US/Eastern'))
     em = discord.Embed()
     em.set_thumbnail(url=ctx.author.display_avatar.url)
@@ -44,7 +44,7 @@ async def playerlogger(ctx):
         em.add_field(name="Arguments", value=Args[1], inline=False)
     em.set_footer(text="{}".format(timestamp.strftime("%Y-%m-%d at %I:%M:%S %p %Z")))
     em.colour = discord.Colour.blue()
-    await channel.send(embed=em)
+    await bot.get_channel(1049510076945281086).send(embed=em)
 
 
 @bot.event
@@ -151,22 +151,22 @@ async def startserver(ctx):
     await ctx.send("Starting server...")
     send_magic_packet('E0-D5-5E-28-75-DE')
 
-@tasks.loop(minutes=1)
-async def checkforrestart():
-    f = open("restartflag.txt","r")
-    if(f.readline(1) == "1"):
-        f.close()
-        f = open("restartflag.txt","w")
-        f.write("0")
-        f.close()
-        print("Restarting....")
-        os.execv(sys.executable, ['python'] + sys.argv)
-        sys.exit()
-
-
+@bot.command()
+@commands.is_owner()
+async def restartbot(ctx):
+    await ctx.send("Bot restarting...")
+    await bot.get_channel(1049510076945281086).send("Bot restarting...")
+    os.execv(sys.executable, ['python'] + sys.argv)
+    sys.exit()
+    # f = open("restartflag.txt","r")
+    # if(f.readline(1) == "1"):
+    #     f.close()
+    #     f = open("restartflag.txt","w")
+    #     f.write("0")
+    #     f.close()
 
 @bot.command()
-@commands.has_any_role('Officer')
+@commands.has_any_role('Officer','Director',"Assistant Director")
 @commands.after_invoke(playerlogger)
 async def rankup(ctx, member: discord.Member):
     myguild = ctx.guild
@@ -213,12 +213,12 @@ async def adduser(ctx, *args):
         await ctx.send('Cancelled...{} was not added.'.format(args[0]))
 
 
-@bot.command()
-@commands.is_owner()
-async def reload(ctx, extension):
-    await bot.reload_extension(f"cogs.{extension}")
-    embed = discord.Embed(title='Reloaded', description=f'{extension} successfully reloaded!', color=0xff00c8)
-    await ctx.send(embed=embed)
+# @bot.command()
+# @commands.is_owner()
+# async def reload(ctx, extension):
+#     await bot.reload_extension(f"cogs.{extension}")
+#     embed = discord.Embed(title='Reloaded', description=f'{extension} successfully reloaded!', color=0xff00c8)
+#     await ctx.send(embed=embed)
 
 
 @bot.command()
