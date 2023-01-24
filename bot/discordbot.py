@@ -1,10 +1,9 @@
 import discord
 from discord.ext import commands, tasks
-from .views import ConfirmView
-from .config import LoadConfig
-from .database import Database
+from bot import views, config, database
 import pytz
 import sys
+import os
 from wakeonlan import send_magic_packet
 
 description = '''Here are the following commands available.'''
@@ -28,16 +27,28 @@ BOT_ACTIVITY = discord.Activity(type=BOT_ACTIVITY_TYPE, name=BOT_ACTIVITY_TEXT)
 
 BOT_TIMEZONE = pytz.timezone('US/Eastern')
 
+DOCKER_HOSTNAME = 'host.docker.internal'
+
+# To make this a production environment, simply run the bot with the environment variable
+# `BOT_DEBUG_ENVIRONMENT=0`
+BOT_DEBUG_ENVIRONMENT = os.environ.get('BOT_DEBUG_ENVIRONMENT', '1') == '1'
+
 ADDUSER_MAX_ATTEMPTS_PER_PERIOD = 1
 ADDUSER_COOLDOWN_PERIOD = 60
 
 DISCORD_BUCKETTYPE_GUILD = commands.BucketType.guild
 
-configuration = LoadConfig('config.json')
+
+if BOT_DEBUG_ENVIRONMENT:
+    configuration = config.LoadConfig('config.json')
+else:
+    configuration = config.ConfigFromEnv()
+
+
 bot = commands.Bot(command_prefix=configuration.prefix,
                    description=description, intents=intents)
-DB = Database(configuration.db_host, configuration.db_username,
-              configuration.db_password, 'br1')
+DB = database.Database(configuration.db_host, configuration.db_username,
+                       configuration.db_password, 'br1')
 
 
 @bot.event
@@ -234,7 +245,7 @@ async def rankup(ctx, member: discord.Member):
 @commands.after_invoke(playerlogger)
 async def adduser(ctx, *args):
     """Adds user to the database"""
-    view = ConfirmView()
+    view = views.ConfirmView()
     await ctx.send(f'Confirmation to add {args[0]} to the database', view=view)
     # Wait for the View to stop listening for input...
     await view.wait()

@@ -1,4 +1,5 @@
 import json
+import os
 
 
 class ConfigContext():
@@ -54,3 +55,13 @@ def LoadConfig(filepath: str):
     except LookupError:
         print('Configuration key not found!')
     return cfg
+
+
+def ConfigFromEnv():
+    return ConfigContext(
+        TOKEN=os.environ.get('BOT_TOKEN', ''),
+        PREFIX=os.environ.get('BOT_COMMAND_PREFIX', ''),
+        DBHOST=os.environ.get('BOT_DB_HOST', ''),
+        DBUSERNAME=os.environ.get('BOT_DB_USERNAME', ''),
+        DBPASS=os.environ.get('BOT_DB_PASSWORD', '')
+    )

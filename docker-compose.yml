@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  thebot:
+    build: .
+    environment:
+      - BOT_DEBUG_ENVIRONMENT=0
+      - BOT_TOKEN=<REPLACEME>
+      - BOT_COMMAND_PREFIX=<REPLACEME>
+      - BOT_DB_HOST=<REPLACEME>
+      - BOT_DB_USERNAME=<REPLACEME>
+      - BOT_DB_PASSWORD=<REPLACEME>

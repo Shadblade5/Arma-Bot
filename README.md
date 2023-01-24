@@ -15,3 +15,9 @@ Create a new directory here named `.venv`, if you have hidden files/folders enab
 Install pipenv and run `pipenv install` to setup dependencies and virtual environment.
 
 Run the bot by executing `runbot.sh`
+
+## Docker deployment
+
+Install Docker and docker-compose on the host machine.
+
+Deploy the bot by using `docker compose up -d` to deploy detached. To check status, use `docker compose ps` to view container statuses.
