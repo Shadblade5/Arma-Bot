@@ -3,6 +3,9 @@ from datetime import datetime
 import pytz
 
 
+DATABASE_NAME = 'arma'
+
+
 class Database:
     def __init__(self, db_host, db_username, db_password, db_name):
         self.db_host = db_host

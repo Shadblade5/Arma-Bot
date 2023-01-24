@@ -1,6 +1,8 @@
 import json
 import os
 
+DEBUG_LOAD_CONFIG_PATH = '/home/raspiserver/Documents/armaPython/config.json'
+
 
 class ConfigContext():
     """A class to represent global configurations for the bot

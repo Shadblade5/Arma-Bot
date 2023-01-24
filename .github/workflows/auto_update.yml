@@ -3,11 +3,11 @@
 
 name: Python application
 
+# This should only execute on direct pushes to master, or a merge to master
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
 
 permissions:
   contents: read

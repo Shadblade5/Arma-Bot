@@ -15,7 +15,7 @@ intents.members = True
 LAN_WAKEUP_CODE = 'E0-D5-5E-28-75-DE'
 
 NEW_COC_CHANNEL_ID = 1053239585838215229
-BOT_LOG_CHANNEL_ID = 1049510076945281086
+BOT_LOG_CHANNEL_ID = 1066975056024064032
 
 PERM_ROLE_OFFICER = 'Officer'
 PERM_ROLE_ADMINNCO = 'Admin-NCO'
@@ -40,7 +40,7 @@ DISCORD_BUCKETTYPE_GUILD = commands.BucketType.guild
 
 
 if BOT_DEBUG_ENVIRONMENT:
-    configuration = config.LoadConfig('config.json')
+    configuration = config.LoadConfig(config.DEBUG_LOAD_CONFIG_PATH)
 else:
     configuration = config.ConfigFromEnv()
 
@@ -48,7 +48,7 @@ else:
 bot = commands.Bot(command_prefix=configuration.prefix,
                    description=description, intents=intents)
 DB = database.Database(configuration.db_host, configuration.db_username,
-                       configuration.db_password, 'br1')
+                       configuration.db_password, database.DATABASE_NAME)
 
 
 @bot.event
