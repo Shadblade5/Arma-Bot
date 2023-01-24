@@ -156,7 +156,7 @@ async def startserver(ctx):
 async def restartbot(ctx):
     await ctx.send("Bot restarting...")
     await bot.get_channel(botlogchannel).send("Bot restarting...")
-    os.execv(sys.executable, ['python'] + sys.argv)
+    # os.execv(sys.executable, ['python'] + sys.argv)
     sys.exit()
 
 
