@@ -11,6 +11,8 @@ import os
 import sys
 from wakeonlan import send_magic_packet
 
+import serverstatus
+
 description = '''Here are the following commands available.'''
 botlogchannel = 1066975056024064032
 intents = discord.Intents.default()
@@ -21,6 +23,7 @@ bot = commands.Bot(command_prefix=config.c.prefix, description=description, inte
 DB = Database(config.c.db_host, config.c.db_username, config.c.db_password, "arma")
 
 
+
 @bot.event
 async def on_ready():
     print('Logged in as')
@@ -29,7 +32,8 @@ async def on_ready():
     print('-' * len(output))
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the server burn"))
     # checkforrestart.start()
-    await bot.get_channel(botlogchannel).send("Bot started.")
+    # await bot.get_channel(botlogchannel).send("Bot started.")
+    getserverstatus.start(bot.get_guild(602809092049862686))
 
 async def playerlogger(ctx):
     timestamp = ctx.message.created_at.astimezone(pytz.timezone('US/Eastern'))
@@ -63,27 +67,6 @@ async def getuserinfo(ctx):
     userinfo = await DB.getUserInfo(ctx.author.id)
     await message.edit(content="Name: {0}\nDiscordID: {1}\nGrade: {2}\nJoinDate: {3}\nBirthday: {4}"
                        .format(userinfo[1], userinfo[0], userinfo[2], userinfo[4], userinfo[5]))
-
-
-# @bot.command()
-# async def id(ctx, *args):
-# targetusers.append(user.id for user in ctx.message.mentions
-# test = "208119044308467712"
-# for x in "<@>":
-#     test = test.replace(x,"")
-# print(test)
-# if len(args)>1:
-# targetUsers = []
-# # print(args)
-# for x in args:
-#     for y in "<@>&":
-#         x = x.replace(y,"")
-#     targetUsers.append(x)
-# print(targetUsers)
-
-# @bot.command()
-# async def updateCoC(ctx):
-#     channel = bot.get_channel(1050527640848695296)
 
 class COC:
     em = 0
@@ -143,6 +126,28 @@ async def createcoc(ctx):
                     current_code.em.add_field(name=current_code.Title, value=current_code.Description, inline=False)
 
         last_code = current_code
+
+
+@tasks.loop(minutes=5)
+async def getserverstatus(guild):
+    trainingserverchannel = await guild.fetch_channel(1067331029154664478)
+    operationsserverchannel = await guild.fetch_channel(1067333212516401223)
+    serverstatuses = await serverstatus.get_servers()
+    trainingserver = "Offline"
+    operationsserver = "Offline"
+    for server in serverstatuses:
+        if ('BR1 Training Server' in server.get('name')):
+            trainingserver = "Online - {} players".format(server['players'])
+        if ('BR1 Operations Server' in server.get('name')):
+            operationsserver = "Online - {} players".format(server['players'])
+
+    if(trainingserverchannel.name != trainingserver):
+        await trainingserverchannel.edit(name= trainingserver)
+
+    if (operationsserverchannel.name != operationsserver):
+        await operationsserverchannel.edit(name=operationsserver)
+
+
 
 
 @bot.command()
