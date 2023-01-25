@@ -5,6 +5,6 @@ WORKDIR /usr/src/unitbot
 
 COPY . .
 
-RUN "pip install pipenv && pipenv install"
+RUN "pip3 install pipenv && pipenv install"
 
 ENTRYPOINT [ "runbot.sh" ]
