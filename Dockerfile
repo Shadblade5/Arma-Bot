@@ -5,6 +5,8 @@ WORKDIR /usr/src/unitbot
 
 COPY . .
 
+RUN "apt-get update && apt install python3-pip"
+
 RUN "pip3 install pipenv && pipenv install"
 
 ENTRYPOINT [ "runbot.sh" ]
