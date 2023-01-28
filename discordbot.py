@@ -69,17 +69,6 @@ async def getuserinfo(ctx):
     await message.edit(content="Name: {0}\nDiscordID: {1}\nGrade: {2}\nJoinDate: {3}\nBirthday: {4}"
                        .format(userinfo[1], userinfo[0], userinfo[2], userinfo[4], userinfo[5]))
 
-class COC:
-    em = 0
-    thread = 0
-
-    def __init__(self, code):
-        self.Section = code[0]
-        self.Subsection = code[1]
-        self.Item = code[2]
-        self.Title = code[3]
-        self.Description = code[4]
-
 
 @bot.command()
 async def createcoc(ctx):
@@ -88,21 +77,20 @@ async def createcoc(ctx):
     print("Getting COC DATA")
 
     with open('coc.json') as f:
-        print("coc opened")
-        coc = json.load(f)#, object_hook=lambda d: SimpleNamespace(**d))
-        print(coc)
+        coc = json.load(f, object_hook=lambda d: SimpleNamespace(**d))
+
         for code in coc:
             codeEM = discord.Embed()
             codeEM.title = code.title
             codeEM.description = code.content
             newmessage = await channel.send(embed=codeEM)
             if len(code.subitems)>0:
-                newthread = await newmessage.create_thread(name=current_code.Title)
+                newthread = await newmessage.create_thread(name=code.title)
                 for subitem in code.subitems:
                     subitemEM = discord.Embed()
                     subitemEM.title = subitem.title
                     subitemEM.description = subitem.content
-                    if len(subitem.items>0) :
+                    if len(subitem.items>0):
                         for item in subitem.items:
                             subitemEM.add_field(name=item.title, value=item.content, inline=False)
                     await newthread.send(embed=subitemEM)
