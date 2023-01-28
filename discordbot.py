@@ -2,6 +2,8 @@ import discord
 from discord.ext import commands
 from discord.ext import tasks
 import config
+import json
+from types import SimpleNamespace
 from database import Database
 import random
 import datetime
@@ -31,9 +33,8 @@ async def on_ready():
     print(output)
     print('-' * len(output))
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the server burn"))
-    # checkforrestart.start()
     # await bot.get_channel(botlogchannel).send("Bot started.")
-    getserverstatus.start(bot.get_guild(602809092049862686))
+    # getserverstatus.start(bot.get_guild(602809092049862686))
 
 async def playerlogger(ctx):
     timestamp = ctx.message.created_at.astimezone(pytz.timezone('US/Eastern'))
@@ -82,50 +83,79 @@ class COC:
 
 @bot.command()
 async def createcoc(ctx):
-    channel = bot.get_channel(1053239585838215229)  # new-code-of-conduct
+    # channel = bot.get_channel(1053239585838215229)  # new-code-of-conduct
+    channel = bot.get_channel(941879875059449946)  # bot-test
     print("Getting COC DATA")
-    threads = []
-    coc = await DB.getcoc()
-    # sorted_coc = sorted(
-    #     coc,
-    #     key=lambda t: (t[0], t[1], t[2])
-    # )
-    for code in coc:
-        # print('{}.{}.{} {}'.format(*code))
 
-        current_code = COC(list(code))
-        # print(f'Current: {current_code.Section}.{current_code.Subsection}.{current_code.Item}')
+    with open('coc.json') as f:
+        print("coc opened")
+        coc = json.load(f)#, object_hook=lambda d: SimpleNamespace(**d))
+        print(coc)
+        for code in coc:
+            codeEM = discord.Embed()
+            codeEM.title = code.title
+            codeEM.description = code.content
+            newmessage = await channel.send(embed=codeEM)
+            if len(code.subitems)>0:
+                newthread = await newmessage.create_thread(name=current_code.Title)
+                for subitem in code.subitems:
+                    subitemEM = discord.Embed()
+                    subitemEM.title = subitem.title
+                    subitemEM.description = subitem.content
+                    if len(subitem.items>0) :
+                        for item in subitem.items:
+                            subitemEM.add_field(name=item.title, value=item.content, inline=False)
+                    await newthread.send(embed=subitemEM)
 
-        if (current_code.Section == 0):
-            if (current_code.Subsection == 0):
-                current_code.em = discord.Embed()
-                current_code.em.title = current_code.Title
-                current_code.em.description = current_code.Description
-                await channel.send(embed=current_code.em)
-            else:
-                if (current_code.Item == 0):
-                    message = await channel.send(embed=discord.Embed(title=current_code.Title))
-                    definitions_thread = await message.create_thread(name=current_code.Title)
-                else:
-                    await definitions_thread.send(
-                        embed=discord.Embed(title=current_code.Title, description=current_code.Description))
-        else:
-            if (current_code.Subsection == 0):
-                message = await channel.send(embed=discord.Embed(
-                    title=f'{current_code.Section}.{current_code.Subsection}.{current_code.Item} {current_code.Title}'))
-                current_thread = await message.create_thread(name=current_code.Title)
-            else:
-                if current_code.Item == 0:
-                    current_code.em = discord.Embed()
-                    current_code.em.title = f'{current_code.Section}.{current_code.Subsection}.{current_code.Item} {current_code.Title}'
-                    current_code.em.description = current_code.Description
-                    if current_code.Subsection > 1:
-                        await current_thread.send(embed=last_code.em)
-                else:
-                    current_code.em = last_code.em
-                    current_code.em.add_field(name=current_code.Title, value=current_code.Description, inline=False)
+            # send message in thread
 
-        last_code = current_code
+
+
+
+
+
+    # threads = []
+    # coc = await DB.getcoc()
+    # # sorted_coc = sorted(
+    # #     coc,
+    # #     key=lambda t: (t[0], t[1], t[2])
+    # # )
+    # for code in coc:
+    #     # print('{}.{}.{} {}'.format(*code))
+    #
+    #     current_code = COC(list(code))
+    #     # print(f'Current: {current_code.Section}.{current_code.Subsection}.{current_code.Item}')
+    #
+    #     if (current_code.Section == 0):
+    #         if (current_code.Subsection == 0):
+    #             current_code.em = discord.Embed()
+    #             current_code.em.title = current_code.Title
+    #             current_code.em.description = current_code.Description
+    #             await channel.send(embed=current_code.em)
+    #         else:
+    #             if (current_code.Item == 0):
+    #                 message = await channel.send(embed=discord.Embed(title=current_code.Title))
+    #                 definitions_thread = await message.create_thread(name=current_code.Title)
+    #             else:
+    #                 await definitions_thread.send(
+    #                     embed=discord.Embed(title=current_code.Title, description=current_code.Description))
+    #     else:
+    #         if (current_code.Subsection == 0):
+    #             message = await channel.send(embed=discord.Embed(
+    #                 title=f'{current_code.Section}.{current_code.Subsection}.{current_code.Item} {current_code.Title}'))
+    #             current_thread = await message.create_thread(name=current_code.Title)
+    #         else:
+    #             if current_code.Item == 0:
+    #                 current_code.em = discord.Embed()
+    #                 current_code.em.title = f'{current_code.Section}.{current_code.Subsection}.{current_code.Item} {current_code.Title}'
+    #                 current_code.em.description = current_code.Description
+    #                 if current_code.Subsection > 1:
+    #                     await current_thread.send(embed=last_code.em)
+    #             else:
+    #                 current_code.em = last_code.em
+    #                 current_code.em.add_field(name=current_code.Title, value=current_code.Description, inline=False)
+    #
+    #     last_code = current_code
 
 
 @tasks.loop(minutes=5)
