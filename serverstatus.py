@@ -16,20 +16,21 @@ async def get_servers():
 
     try:
         game_servers = client.gameservers.get_server_list(filter_text_server)
-        for server in game_servers:
-            addr, port = server['addr'].split(':')
-            info = a2s_info((addr, int(port)))
-            statuses.append({
-                'name': server['name'],
-                'players': server['players'],
-                'mission': info['game'],
-                'map': server['map']
-            })
+        if game_servers != 'None':
+            for server in game_servers:
+                addr, port = server['addr'].split(':')
+                info = a2s_info((addr, int(port)))
+                statuses.append({
+                    'name': server['name'],
+                    'players': server['players'],
+                    'mission': info['game'],
+                    'map': server['map']
+                })
     except (IndexError, SteamError) as err:
         print(err)
         print('Server offline or unreachable')
-
-    client.logout()
+    finally:
+        client.logout()
     return statuses
 
 
