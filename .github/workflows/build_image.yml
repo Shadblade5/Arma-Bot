@@ -18,6 +18,9 @@ on:
 permissions:
   contents: read
 
+# TODO(cabal): Use build-artifacts to upload pipenv install stuff as well as docker images
+# to be usable in other jobs, and to stop deployments from occuring if dependencies fail to install
+
 jobs:
   docker-build:
     runs-on: "ubuntu-latest"
