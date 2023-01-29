@@ -1,0 +1,36 @@
+{
+    "metadata": {
+        "edited_timestamp": "YYYY-MM-DDTHH:MM:SSZ",
+        "modified_by": "Cabal"
+    },
+    "coc": {
+        "header": {
+            "title": "PREAMBLE",
+            "sections": [
+                { "type": "numbered_list", "header": "THIS UNIT aspires...these Codes of Conduct have been adopted to ensure the following:", "content": [
+                    "Players are given...",
+                    "All members...",
+                    "Administrators..."
+                ]},
+                { "type": "paragraph", "header": "", "content": "These Codes of Conduct.." },
+                { "type": "list", "header": "These Codes have been organized into 7 sections", "content": [
+                    "Preamble with Basic Definitions",
+                    "1 - General Conduct",
+                    "2 - Operational Conduct",
+                    "3 - Campaign/Operation/Modlist Design",
+                    "4 - Campaign/Operation Signup",
+                    "5 - Administrative Duties",
+                    "6 - Discipline"
+                ]}
+            ]
+        },
+        "sections": [
+            {
+                "title": "Definitions",
+                "items": [
+                    { "title": "Administrator", "content": "Member..." }
+                ]
+            }
+        ]
+    }
+}
