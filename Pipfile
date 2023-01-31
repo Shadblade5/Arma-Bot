@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+discord = "==2.1.0"
+pytz = "==2022.7.1"
+wakeonlan = "~=3.0.0"
+mysql.connector = "==2.2.9"
+
+[dev-packages]
+pre-commit = "*"
+flake8 = "*"
+autopep8 = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-lazy-fixture = "*"
+freezegun = "*"
+
+[requires]
+python_version = "3.10"
+
+[scripts]
+start = "python bot/discordbot.py"
+docker_build = "docker image build --tag br1bot ."
+docker_start = "docker run -it --rm br1bot"
+format = "autopep8 --recursive --in-place ."
+lint = "flake8 --statistics --count"

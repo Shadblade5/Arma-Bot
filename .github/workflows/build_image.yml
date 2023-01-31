@@ -1,0 +1,45 @@
+﻿# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Build and Verify Application
+
+# This should only execute on direct pushes to master, or a merge to master
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - closed
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+# TODO(cabal): Use build-artifacts to upload pipenv install stuff as well as docker images
+# to be usable in other jobs, and to stop deployments from occuring if dependencies fail to install
+
+jobs:
+  docker-build:
+    runs-on: "ubuntu-latest"
+
+    steps:
+    -
+      name: Checkout
+      uses: actions/checkout@v3
+    -
+      name: Branch name
+      run: echo running on branch ${GITHUB_REF##*/}
+    -
+      name: Build image
+      env:
+        BOT_COMMAND_PREFIX: ${{ secrets.BOT_COMMAND_PREFIX}}
+        BOT_DB_HOST: ${{ secrets.BOT_DB_HOST}}
+        BOT_DB_PASSWORD: ${{ secrets.BOT_DB_PASSWORD}}
+        BOT_DB_USERNAME: ${{ secrets.BOT_DB_USERNAME}}
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN}}
+        BOT_TOKEN_DEV: ${{ secrets.BOT_TOKEN_DEV}}
+      run: |
+        docker build -t br1armabot:${GITHUB_REF##*/} .
