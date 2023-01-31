@@ -44,9 +44,13 @@ jobs:
   run_python_tests:
     runs-on: "ubuntu-latest"
     name: test-python
-    needs: pipenv_init
+    needs: [ pipenv_init ]
 
     steps:
+      -
+        name: Install pipenv
+        run:
+          pip3 install pipenv
       -
         name: Checkout
         uses: actions/checkout@v3
