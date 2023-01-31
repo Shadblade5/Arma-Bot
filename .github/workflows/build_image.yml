@@ -62,6 +62,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: init_pipenv
+          path: .venv
       -
         name: Run tests
         run:
@@ -94,6 +95,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: init_pipenv
+          path: .venv
       -
         name: Run linter
         run:
