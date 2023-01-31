@@ -7,7 +7,7 @@ name = "pypi"
 discord = "==2.1.0"
 pytz = "==2022.7.1"
 wakeonlan = "~=3.0.0"
-mysql.connector = "==2.2.9"
+mysql-connector-python = "==8.0.32"
 
 [dev-packages]
 pre-commit = "*"
