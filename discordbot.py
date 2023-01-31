@@ -36,6 +36,7 @@ async def on_ready():
     # await bot.get_channel(botlogchannel).send("Bot started.")
     # getserverstatus.start(bot.get_guild(602809092049862686))
 
+
 async def playerlogger(ctx):
     timestamp = ctx.message.created_at.astimezone(pytz.timezone('US/Eastern'))
     em = discord.Embed()
@@ -72,29 +73,67 @@ async def getuserinfo(ctx):
 
 @bot.command()
 async def createcoc(ctx):
-    # channel = bot.get_channel(1053239585838215229)  # new-code-of-conduct
-    channel = bot.get_channel(941879875059449946)  # bot-test
-    print("Getting COC DATA")
-
+    channel = bot.get_channel(1053239585838215229)  # new-code-of-conduct
+    # channel = bot.get_channel(941879875059449946)  # bot-test
+    print("COC")
     with open('coc.json') as f:
-        coc = json.load(f, object_hook=lambda d: SimpleNamespace(**d))
+        try:
+            file = json.load(f, object_hook=lambda d: SimpleNamespace(**d))
+        except IOError:
+            print(f'Failed to open CoC File!')
+        except json.JSONDecodeError:
+            print('Invalid JSON provided')
+        except KeyError:
+            print('No `coc` key provided in file')
+        try:
+            # preambleitem = file.preamble
+            # preamble_em = discord.Embed()
+            # preamble_em.title = preambleitem.title
+            # preamble_em.description = preambleitem.content
+            # preamblemessage = await channel.send(embed=preamble_em)
 
-        for code in coc:
-            codeEM = discord.Embed()
-            codeEM.title = code.title
-            codeEM.description = code.content
-            newmessage = await channel.send(embed=codeEM)
-            if len(code.subitems)>0:
-                newthread = await newmessage.create_thread(name=code.title)
-                for subitem in code.subitems:
-                    subitemEM = discord.Embed()
-                    subitemEM.title = subitem.title
-                    subitemEM.description = subitem.content
-                    if len(subitem.items>0):
+
+            definitionlist = file.definitions
+
+            definitions_em = discord.Embed()
+            definitions_em.title = definitionlist.title
+            definitionsmessage = await channel.send(embed=definitions_em)
+
+            definitionsthread = await definitionsmessage.create_thread(name=definitionlist.title)
+            for definition in definitionlist.subitems:
+                definition_em = discord.Embed()
+                definition_em.title = definition.title
+                definition_em.description = definition.content
+
+                await definitionsthread.send(embed=definition_em)
+
+            coc = file.coc
+            codeid = 1
+            subid = 0
+            itemid = 0
+            for code in coc:
+                subid = 0
+                code_em = discord.Embed()
+                code_em.title = f'{codeid}.{str(subid)}.{str(itemid)} ' + code.title
+                code_em.description = code.content
+                newmessage = await channel.send(embed=code_em)
+                if len(code.subitems) > 0:
+                    newthread = await newmessage.create_thread(name=code.title)
+                    for subitem in code.subitems:
+                        subid += 1
+                        itemid = 0
+                        subitem_em = discord.Embed()
+                        subitem_em.title = f'{str(codeid)}.{str(subid)}.{str(itemid)} ' + subitem.title
+                        subitem_em.description = subitem.content
                         for item in subitem.items:
-                            subitemEM.add_field(name=item.title, value=item.content, inline=False)
-                    await newthread.send(embed=subitemEM)
+                            itemid += 1
+                            subitem_em.add_field(name=item.title, value=item.content, inline=False)
 
+                        await newthread.send(embed=subitem_em)
+
+                codeid += 1
+        except Exception as e:
+            print(e)
             # send message in thread
 
 

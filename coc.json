@@ -1,0 +1,596 @@
+{
+   "preamble":{
+      "title":"Preamble",
+      "content":"This Unit aspires to provide a satisfying player experience and as such, these Codes of Conduct have been adopted to ensure the following:\n\n1: Players are given an immersive and challenging ARMA 3 gaming experience.\n2: All members are treated respectfully inside and outside operations.\n3: Administrators, and those with administrative responsibilities, have clearly defined guidelines as to what their roles are, and their discretionary boundaries.\n\nThese Codes of Conduct cannot reasonably define all behaviors which would be considered by a reasonable person to be unacceptable. Behaviors which would be considered unacceptable by a reasonable person, or in defiance of a law or term of service, but not defined within these Codes of Conduct would still be acted upon as a violation under a common sense standard.\n\nThese Codes have been organized into 7 sections;\n Preamble with Basic Definitions\n 1 General Conduct\n 2 Operational Conduct\n 3 Campaign,Operation & Modlist Design \n 4 Campaign Operation Signup \n 5 Administrative Roles \n 6 Discipline."
+   },
+   "definitions":{
+      "title":"Definitions",
+      "subitems":[
+         {
+            "title":"Administrator",
+            "content":"Member with administrative responsibility in the discord, any unit social or web account, or in the unit's operations' server.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Annoying",
+            "content":"Behavior which is either intentionally irritating or intentionally continued after being asked to stop by another member.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Ban",
+            "content":"permanently being removed from the unit.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Campaign",
+            "content":"A series of consecutive operations designed by 1 Operation Designer in which a complete story is told.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"CoC",
+            "content":"Codes of Conduct",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Deliberate",
+            "content":"Behaviors which are done consciously and intentionally.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Disruptive",
+            "content":"Behavior which interrupts an event, activity or process, by causing a disturbance or problem.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"DM",
+            "content":"Discord direct message.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Griefing",
+            "content":"Behaviors during operations which are deliberately annoying and\/or intended to irritate\/harass another member.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Kick",
+            "content":"Temporarily being removed from the unit.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Malicious",
+            "content":"Behavior which intends to do harm.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Maturity",
+            "content":"The willingness of an individual to take responsibility for conducting themselves in consideration of others in a positive manner.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Members",
+            "content":"Members are any person who has joined this discord.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"NSFW",
+            "content":"Not safe for work; includes anything which graphically depicts sexual activity, death, carnage, and\/or gore to include animal, animated, and detailed text-based content.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Operation Designer",
+            "content":"An administrator charged with creating and running unit operations.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Players",
+            "content":"Any member with no administrative responsibility.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Respect",
+            "content":"Due regard for the feelings, wishes, traditions, and hard work of others.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Trolling",
+            "content":"Deliberately using speech, text, images and\/or behaviors to provoke a hostile reaction from another member or a group of other members.",
+            "items":[
+
+            ]
+         },
+         {
+            "title":"Unit",
+            "content":"Bohemia Interactive ARMA III Unit.",
+            "items":[
+
+            ]
+         }
+      ]
+   },
+   "coc":[
+      {
+         "title":"GENERAL CONDUCT",
+         "content":"",
+         "subitems":[
+            {
+               "title":"Maturity",
+               "content":"Act with maturity regardless of the setting.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Opinionated Topics in a Public Forum",
+               "content":"Refrain from discussing politics, religions, creeds, and any other highly opinionated topics in a public forum, including operations, unless all in attendance are willing to participate and it is not disruptive towards another member's operational experience.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Annoying and Disruptive Behavior",
+               "content":"Abstain from all annoying, disruptive, and\/or malicious behaviors to include (but not limited to) griefing\/trolling. This also includes using derogatory terms and\/or posting derogatory images which either intentionally are, or would be perceived by a reasonable person to be, derogatory against any race, sex, gender, or creed.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Sexual Harassment",
+               "content":"Do not sexually harass another member either in this discord, or through DMs. Do not reach out to other members for the purposes of sexual gratification.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Violations of Law",
+               "content":"Do not post anything within this Discord in any channel in violation of any national or international criminal or civil law.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Discord Terms of Service Compliance",
+               "content":"Do not post anything within this Discord which is in violation of Discord's terms of service.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"NSFW Content",
+               "content":"Do not post any NSFW content in this discord in any channel.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Discord Nicknames",
+               "content":"Do not use a discord nickname which:\na.    Violates the preamble or any other code of conduct.\nb.    Is sexual in nature including referencing a sexual organ or sexual act.\nc.    Includes profanity or is generally profane in nature.\nd.    Is intended to annoy, harass, troll, grief or disrupt another member.\ne.    Is not unique enough to distinguish from another member. In cases where two players have the same (or close to the same) name, the more senior member will retain their name and the less senior player will be asked to update to a more distinguishable name.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Conflict Resolution and Gossip",
+               "content":"Attempt to resolve all conflicts through discussion and refrain from gossip. Report any conflicts which cannot be resolved by the involved parties and are escalating to a hostile level, or are disruptive to others who are not involved to a moderator.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Unit Grade System",
+               "content":"Players are organized by seniority within the discord using a Unit Grade (UG) system based off of operational attendance. This system is to identify players who are more active within the unit.\n",
+               "items":[
+                  {
+                     "title":"Rank Breakdown",
+                     "content":"Unit Grade is broken down into 10 Grades, with each set of 10 grades requiring 5 more operations to rankup.\n Ex. If you are rank 1-10, you need 5 to rankup, if you are 11-21 you need 10 to rankup etc..."
+                  }
+               ]
+            },
+            {
+               "title":"Joint Operations and Recruiting for Other Units",
+               "content":"a. This unit will not participate in Joint Ops. Advertising for or encouraging participation within a Joint Operation shall be a violation of this CoC.\nb. Members who use this discord for the purposes of recruiting for other units shall be in violation of this CoC.",
+               "items":[
+
+               ]
+            }
+         ]
+      },
+      {
+         "title":"OPERATIONAL CONDUCT",
+         "content":"",
+         "subitems":[
+            {
+               "title":"Team Work",
+               "content":"Work as a team and follow the in-game chain of command. Players may ask questions if orders are not easily understood or do not make sense provided there is time to do so and the question is asked somewhat respectfully. Players may also suggest courses of action which they feel may be beneficial to in-game leadership if they do so somewhat respectfully.\nAvoid openly complaining during operations and do not make comments and\/or take actions which negatively impact other people's enjoyment.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Trolling\/Griefing",
+               "content":"Do not troll\/grief in-game. This includes, but is not limited to, intentionally team killing or taking any action which is disruptive, malicious, annoying, etc. and would negatively impact the experience of other players.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Role Playing",
+               "content":"Play any operation as if you are the character which you are playing and as if you are in mortal peril. Do not break the fourth wall and try to immerse yourself as if you are in the situation your character is.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"In Game Text Channels",
+               "content":"Do not use in-game text channels unless you are communicating a technical malfunction of the server, and\/or game engine to the operation designer or designated Zeus, or must leave the operation due to a real-life situation.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Rage Quitting",
+               "content":"Do not quit an operation out of frustration. Provide feedback via the appropriate form to the operation designer once the operation has completed to help the designer improve your experience.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Arma III and Teamspeak Profile Names",
+               "content":"Arma III and Teamspeak 3 profile names must be the same or a similar facsimile of their Discord profile names following the guidelines of CoC 1.8. Campaigns may dictate that a player uses a different profile name for roleplaying purposes.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Player Profile: in-game Unit",
+               "content":"Only join this Unit's operations using this Unit as their active unit, or having no active unit assigned to their ARMA III profile. Units automatically assign a patch to player's in-game uniforms and a tag at the front of their profile's name.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Campaign\/Operation Specific Rules",
+               "content":"Follow any operational specific or campaign specific rules.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Non-loadout\/Enemy Equipment",
+               "content":"Do not pick up equipment not designated for your slot from allied or enemy corpses, arsenals, weapons stockpiles, etc. Unless otherwise noted in a campaign's rules, you may pick up battlerifles or SMGs if all of the following conditions are met:\n1- you have expended all of your ammunition \n2- there is an immediate need to continue fighting\n3- you have permission from your in-operation chain of command\n4- there is no resupply enroute which would reach you prior to you needing to continue combat",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Player Participation",
+               "content":"Members shall own ARMA III and fully participate in at least once operation every three months (4 operations a year minimum). Leaving prior to the conclusion of an operation, or showing up midway through an operation shall not count as fully participation.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Player Leaves of Absence",
+               "content":"Players who have significant life circumstances in which they require a long break, should reach out to a retention admin or a moderator with their circumstances to obtain LOA status. Outside of military deployments, or other extended events (missionary trips, law enforcement academies, study abroad classes, etc.) which would hold the player somewhere where they could not participate for more than 4 months, no player shall be granted more than 26 weeks on LOA per year. Players requiring several LOAs, regardless of reason or total duration of yearly LOA time, within a year shall be asked whether or not they want to continue with the unit and may be kicked from the unit if it is impractical for them to continue with the unit at that time.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Operation Communications",
+               "content":"Do not play music over local voice channels. Follow in-game communications etiquette as described during Basic Combat Training or at the direction of the in-operation Leadership, whichever sets a higher standard.\nOperations Designers may choose to play music over direct voice channels, or general radio chatter audio files over radio channels provided it does not breach any other CoC and is approved during a Quality Assurance Review.",
+               "items":[
+
+               ]
+            }
+         ]
+      },
+      {
+         "title":"CAMPAIGN, OPERATION, AND MODLISTS DESIGN",
+         "content":"",
+         "subitems":[
+            {
+               "title":"Operation Design Standard",
+               "content":"Operations are to be designed to be immersive, narrative based experiences. Operation Designers are expected to create various operations which create a realistic atmosphere and submit operations for quality review, prior to playing, to ensure the following:\na.    If used, arsenals have the basic equipment needed for each role within the operation.\nb.    If used, arsenals do not contain unnecessary equipment such as out of place cosmetic wear, novelty ammunition, too many ammunition types per weapon (more than 3 different STANAG magazines from multiple mods), novelty weapons (weapons without purpose\/out of place cosmetically), etc.\nc.    Players have access to necessary equipment in some form; either arsenals or some other creative means.\nd.    Initial spawn points have been set up correctly; either respawn positions with associated settings or AI slots.\ne.    All mission specific multiplayer settings have been set up correctly in Eden.\nf.    An in-operation full squad briefing has been completed using ACE Slideshow or some other means to display intelligence and objectives on a screen or board.\ng.    The operation designer has completed a full plan for the operation in a word doc.\nh.    All necessary scripts have been added to the mission file.\ni.    The mission has been designed to be immersive using objects, effects, and scripts.\nj.    The mission has a comprehensible narrative.\nk.    The mission plays stable on the server.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Campaigns",
+               "content":"Campaigns will have a minimum of four operations which are connected by a comprehensive and engaging singular narrative. Campaigns will be fully completed and submitted for quality review in compliance with 3.1 prior to them being announced for signups. New campaigns may build upon the story of past campaigns.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Campaign Design Standard ",
+               "content":"Campaign rules are decided upon by the operation designer using the following standards:\na.    Campaigns will run no more than once a week and a least once a month. \nb.    Operation designer may create a modpack for campaigns provided the modpack is submitted for review using guidelines in 3.6.\nc.    Campaigns may be in any setting provided there is an interested playerbase which can fill out at least a squad sized element and the needed mods are in compliance with 3.6.\nd.    A sign-up process must be designed in which players submit interest for multiple slots.\ne.    Stamina will be enabled.\nf.    Crosshairs will be disabled.\ng.    Campaign signups will be for the entirety of the campaign (i.e. slots are locked after sign-up). Players, especially players on an approved LOA status, should be allowed to be absent for no more than 25% of the scheduled operations. Players can be added to or dropped from the campaign as it progresses so long as there is a story explanation for the gain and\/or loss.\nh.    All operations for the campaign will be scheduled prior to the announcement.\ni.    Operation designer may choose to allow third person or make the campaign first person only.\nj.    Any slot, as defined in section 4 (CAMPAIGN AND OPERATION SIGNUP), may be used in the squad or platoon layout. Operation designers may modify slots to accommodate period specific equipment (i.e. SMG Operators in WW2).\nk.    Campaigns will be roleplaying focused. The operation designer may choose to have the players make specific characters with backstories, or may assign characters to players and allow players to use their Discord monikers as callsigns.\nl.    Operation designers may allow for respawns during operations however, there must be a low limit (1 per player total count max) to the amount of respawns available; the player must be assigned or create a new character prior to the start of the next campaign operation.\nm.    Operation designers must have a military rank system incorporated into the slots to create an in-game chain of command. This rank system can be any military rank system which makes sense to the setting of the campaign.\nn.    Campaigns will incorporate appropriate equipment following guidelines in 3.1.b and 3.4.\no.    Other miscellaneous rules not discussed above can be reviewed and approved by a quality assurance admin.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Player Loadout Standard",
+               "content":"Loadout equipment available to the player shall not include:a.    Any wearable equipment which is out of period, distractingly flamboyant, overly civilian in design (without story motivated cause), and\/or distracts from the approved uniform of the campaign or operation.\nb.    More than 3 different magazine variants for each weapon, not including launchers.\nc.    Any weapon which cosmetically or historically make sense to the setting; occasionally historical weapons may need to be substituted with other weapons of a similar variety from the same era and this prohibition does not intend to prevent that necessary substitution.\nd.    Any equipment which is known to cause server or local instability.\ne.    Any equipment which only serves to encourage disruptive behavior.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Standalone Operations",
+               "content":"Standalone operations may be made using either the basic vanilla modpack posted in the discord or any recent or frequently used campaign modpack. These operations must be designed following regulations posted in sections 3.1, 3.3.c, 3.3.d, 3.3.e, 3.3.f, and 3.4.\nOperation Designers are encouraged to create standalone operations, submit them for review, and archive them for future use to allow for the mission designer to host a mission if unforeseen circumstances prevented a scheduled operation from occurring OR to host a mission when players demand is higher than normal.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Modpack Design Standard",
+               "content":"Modpacks designed by Operation Designers shall: \na.    Only include mods which are necessary for their current campaign. \nb.    Only include mods which have proven to be stable. \nc.    Only include mods with server keys. \nd.    Not include mods which are for comedic purposes only. \ne.    Not be overly excessive in size or quantity. \nf.    Submit modpacks for a quality review and wait until the it is approved before working on a campaign dependent on the modpack.",
+               "items":[
+
+               ]
+            }
+         ]
+      },
+      {
+         "title":"CAMPAIGN AND OPERATION SIGNUP",
+         "content":"",
+         "subitems":[
+            {
+               "title":"Campaign\/Operation Rosters ",
+               "content":"Campaigns and operations will have player slots which are organized into a military squad, or platoon. \na.    Squads will have 20 or less players, minimum of 9, organized under a squad leader with 2-5 different fireteams. \nb.    Platoons will have 21 or more players organized under a platoon with at least 2 squads with 1-3 teams each",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Additional Equipment Glossary",
+               "content":"UBGL – Assault or Battlerifle with an Underbarrel Grenade Launcher \nGL – Grenade Launcher (M79, etc) \nLAT – Disposable AT Launcher \nAT – Any reloadable AT or AA Launcher \nDMR – Designated Marksman Rifle \nSMG – Submachine Gun \nRGF – Rangefinder \nHMG – Heavy Deployable Machine Gun \nLMG – Light machine gun (M249, etc) \nBR – A battle or assault rifle \nRBP – Radio Backpack",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Slot Loadout Standard   ",
+               "content":"In order to facilitate a more balanced, challenging, and immersive environment, the following is a list of equipment which is allowed per slot with required certification: \n \na.    Platoon Lead: Must carry a RGF and a BR. Leadership Certified \nb.    RTO: Must carry a RBP, RGF and a UBGL with smoke rounds and flares. Leadership Certified \nc.    Platoon Sergeant: Must carry a RGF, BR and LAT. Leadership Certified \nd.    Squad Lead: Must carry a RGF and a UBGL, or BR. Leadership Certified \ne.    Assistant Squad Lead: Must carry a RGF, BR and LAT. Leadership Certified \nf.    Medic: Must carry a sidearm and advanced medical equipment (unless campaign allows them to carry a BR). Medical Certified \ng.    Combat Life Saver: Must carry a SMG and advanced medical equipment. Medical Certified \nh.    Team Lead: Must carry a BR and RGF. Leadership Certified \ni.    AT Operator: Must carry a BR and AT. AT Certified \nj.    AT Assistant: Must carry a BR and LAT. Must bring additional ammo for AT Operator. AT Certified \nk.    Deployable Gun (HMG, GMG, TOW) Operator: Must carry a BR or SMG and the HMG Gun Bag. Advanced Combat Certified \nl.    Assistant Deployable Gun Operator: Must carry a BR or SMG and the HMG Tripod Bag. Advanced Combat Certified. \nm.    Deployable Gun Ammo Bearer: Must carry a BR and additional ammo for the HMG. Advanced Combat Certified \nn.    Autorifle Operator: Must carry LMG. Basic Combat Certified \no.    Autorifle Assistant: Must carry a BR and additional ammo for the LMG. Basic Combat Certified \np.    Grenadier: Must carry an UBGL or a GL. Advanced Combat Certified \nq.    Rifleman: Must carry a BR. Basic Combat Certified \nr.    Marksman: Must carry a DMR and RGF. Advanced Combat Certified \ns.    Demolitions Specialist: Must carry a BR or SMG and demolitions equipment. Demolitions Certified \nt.    EOD Specialist: Must carry a BR, Mine Detector and Defusal Kit. Demolitions Certified \nu.    Transportation Driver: Must carry a BR or an SMG. Transportation Certified \nv.    Logistics Driver: Must carry a SMG. Transportation Certified \n \nAll slots may carry backpacks IF the slot is not taken by equipment however, stamina is enabled and players must account for weight in order to be effective in combat. Butt-packs, bandoliers, or smaller backpacks, are recommended for players who do not have to carry equipment for other slots.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Campaign Signups",
+               "content":"Campaign signup rules shall be defined by the operations designer that is running the campaign. In general, players should submit multiple choices for posted roles\/slots which they are interested in to the operations designer in the appropriate channel however, this is up to the operations designer as to its execution.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Standalone Operation Signups",
+               "content":"Standalone Operations signup shall be done in the appropriate channel under the Operations Host Times category in this discord. Players should look at the sheet and if they are interested in playing, will sign up using the following format: \nOperation Date (Month\/Day)\/ Slot. \n \nExamples: \n1\/15 – Squad Lead \n1\/15 – AT Operator \n1\/15 – Rifleman \n \nPlayers may sign up for standalone operations as Reserve if they are unsure if they can make the operation but are interested in playing if able to.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Absences from Campaign or Standalone Operations",
+               "content":"Absences from Campaign Operations could result in ejection from the campaign. Habitual absences from any operations will be reviewed by a moderator and will be subject any of the following:  \n \na.    Removal from the unit. \nb.    Loss of certifications. \nc.    Ban from slots\/roles. \nd.    Restriction to Rifleman slots\/roles only. \n \nThis is not to be punitive towards significant life circumstances, but to prevent necessary slots from being taken by members with unreliable schedules. Players with significant life circumstances preventing them from playing temporarily should apply for LOA status in accordance with section 2.11.",
+               "items":[
+
+               ]
+            }
+         ]
+      },
+      {
+         "title":"ADMINISTRATIVE ROLES",
+         "content":"",
+         "subitems":[
+            {
+               "title":"Director",
+               "content":"The Director is the unit leader and is responsible for overseeing the entire unit in every facet.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Assistant Director",
+               "content":"Assistant Director assists the director in whatever way is asked of them. May act as the director in the event of the directors absence during a situation which requires timely resolution. May act as interim lead Moderator, Operation's Designer, Quality Assurance Admin and Retention Admin until the position has been filled.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Moderator",
+               "content":"Moderators are responsible for judiciary actions within the unit in accordance with section 6 of the CoC. They moderate community conduct both in operations and the discord and may, with due cause, kick members in significant violation of the CoC. Moderators also issue LOA status in accordance with section 2.11 of the CoC. \n \nThe Lead Moderator is responsible for reviewing other moderator's actions, participating in Admin Meetings and leading Moderator meetings.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Operation Designers",
+               "content":"Operations designers are responsible for campaign\/operation development, operational\/campaign compliance with CoC section 3, running operations in-game via the Zeus module, and developing campaign modlists for campaigns they run. They are accountable to administrator and QA Admins. \n \nThe three levels of Operation designers are as follows: \n1.    Tentative Operation Designer – A member who is in an admittance process to become an Operation Designer. \n2.    Operation Designer – A member who has passed a minimum of 4 Quality Assurance Reviews on operations and has successfully created and ran a well-received campaign of at least 4 operations while under observation by the Lead Operation Designer or designee. \n3.    Lead Operation Designer – An admin responsible for overseeing other Operation Designers, scheduling campaigns\/operations, meeting with QA and Retention Admins to ensure quality operation designs\/good feedback from players. May have additional duties not listed as assigned by the Administrator.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Quality Assurance",
+               "content":"Quality Assurance members are responsible for overseeing campaign development and operational compliance with CoC section 3. They administrate Quality Review Checks on all campaigns, modlists, and Operations. Works with Operation Designers and Retention Admins to ensure player satisfaction. \nLead QA Admin is responsible for attending Admin Meetings and running QA Meetings.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Recruiter",
+               "content":"Recruiters are responsible for recruiting and player engrossment within the unit. Works with QA Admins and Moderators to ensure player satisfaction and CoC mandated participation. Posts recruitment posts using official Unit accounts on various websites. Reviews Feedback forms and notifies QA Admins and responsible Operation Designers of significant player enjoyment\/criticisms. Reaches out to inactive players and determines whether a player needs an LOA status or referral to moderator for removal from the unit. \n \nLead Retention Admin is responsible for attending Admin Meetings, running Retention Meetings, ensuring that recruitment posts are made at regular weekly intervals, and other duties as assigned. May delegate tasks to other Retention Admins.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Media Creator",
+               "content":"Media Creators are responsible for collecting in-game footage from various sources, compiling the footage, and posting on the Unit's YouTube channel. May seek assistance from any member not already engaged with other Administrative Duties (not including training). Will forward any footage found of CoC violations to a Moderator for review.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Trainer",
+               "content":"Trainers are members responsible for creating training documentation, planning trainings, and running trainings for one of the following unit certification programs: \n \nBasic Combat Certification \nAdvanced Combat Certification \nAnti-Tank Infantry Certification \nLeadership Certification \nMedical Certification \nDemolitions Certification \nTransportation Certification \n \nLead Trainers are responsible for ensuring that certified members are given access to appropriate documentation, are receiving high quality training which fully prepares them for the role, ensuring that certified members are recertified after not participating in their certified role for 6 months prior to being allowed to participate in that role, approving members to be certified trainers for the program which the Lead Trainer is in charge, and other duties as assigned. May participate in Admin meetings and may run meetings for their specific trainers.",
+               "items":[
+                  {
+                     "title":"BCC",
+                     "content":"Basic Combat Certification is to include how to operate rifles, hand grenades, autorifles, and light machine guns and how the associated equipment is effectively incorporated within a platoon\/squad\/team\/other player element not listed. It shall also include basic radio, map marking, team communication, and in-operation etiquette as well as MOUT, basic infantry tactics, expectations on how to move with a player element, and how to use basic unit mods (ACE, ACRE, Enhanced Movement, etc.). Required for all players."
+                  },
+                  {
+                     "title":"ACC",
+                     "content":"Advanced Combat Certification is to include how to operate Marksman Rifles, Grenade Launchers, and deployable weapons and how the associated equipment is effectively incorporated within a player element. It shall also include how ranging with and without a rangefinder, and effective marking and illumination with smoke and flare rounds."
+                  },
+                  {
+                     "title":"Leadership",
+                     "content":"Leadership Certification shall include long range radio communications, how and when to call support (artillery, CAS, Medivac, etc.), Platoon\/squad\/team tactics and organization, how to reorganize during a crisis situation, and leadership expectations including how to address CoC violations observed by team members in operation."
+                  },
+                  {
+                     "title":"Transportation",
+                     "content":"Transportation Certification shall include how to safely operate a vehicle for logistical needs, how to repair vehicles, and other responsibilities to be discussed."
+                  },
+                  {
+                     "title":"Other Certification Programs",
+                     "content":"Anti-Tank, Demolitions, and Medical Certification Programs are to train on proper use of certification locked equipment, role responsibilities, and how the role is to incorporate itself within a player element."
+                  }
+               ]
+            },
+            {
+               "title":"Trainer Restrictions",
+               "content":"Outside of an temporary need, no member shall be allowed to be a trainer or lead trainer for more than one certification program. Trainers may choose to swap to another training program provided there is a need but will forfeit their trainer status with the original program.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Admin Restrictions",
+               "content":"No member shall hold more than two administrative roles. \n \n",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Temporary Administrative Role",
+               "content":"In the circumstance that a role is not filled or requires more members, a member may temporarily fill more than 2 roles. \n",
+               "items":[
+
+               ]
+            }
+         ]
+      },
+      {
+         "title":"DISCIPLINE",
+         "content":"",
+         "subitems":[
+            {
+               "title":"Director's Rights to Discipline",
+               "content":"The Director retains the right to take any disciplinary actions which they deem appropriate and override any disciplinary decision made by any other moderator.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Ban Powers",
+               "content":"The Director and Assistant Director are the only members with the power to Ban. \n \n \n \n",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Kick Powers",
+               "content":"Moderators have the power to kick members for violations of the CoC in compliance with 6.4, 6.5 and 6.6. ",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Disciplinary Discretion",
+               "content":"Disciplinary rubric posted in section 6.5 is organized by severity with Yellow highlight sections generally being lowest in severity, and Red highlighted sections generally being highest in severity. Multiple infractions of the CoC during one incident shall be evaluated on a common-sense standard using the rubric as a base guideline for disciplinary decision making.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Disciplinary Rubric",
+               "content":"https:\/\/cdn.discordapp.com\/attachments\/1048826365580939264\/1048870514761941023\/image.png",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Code of Conduct Enforcement",
+               "content":"Moderators are expected to use the Disciplinary Rubric to enforce the CoC however, in situations which are against the preamble and not covered by the CoC or if a player's personal circumstances would mitigate disciplinary actions, the Moderator must make a discretionary decision on which disciplinary action to take.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Admin Discipline",
+               "content":"Violations by members with an administrative role of Sections 1, 2, 3, and 5 are subject to Director Review and removal from their administrative role at the sole discretion of the Director or their designee.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Suspension",
+               "content":"Suspension status is a discord role which limits a player's ability to see and interact with the discord. A player in suspension status shall not be allowed to participate in any operations, trainings, or official unit function.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"Senior Player Ban Process",
+               "content":"Vetted\/senior players who actively participate in operations\/campaigns, whose actions require a kick per the rubric but are not egregious enough to immediately warrant a kick or ban, should be placed in suspension status pending an judicial and\/or Director review.",
+               "items":[
+
+               ]
+            },
+            {
+               "title":"General Ban Process",
+               "content":"If an administrator with Ban powers is unavailable, Moderators shall place a member requiring a Ban into suspension status rather than kicking the member. An administrator with Ban powers will execute the ban as soon as possible.",
+               "items":[
+
+               ]
+            }
+         ]
+      }
+   ]
+}
