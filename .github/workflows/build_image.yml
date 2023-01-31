@@ -33,7 +33,7 @@ jobs:
       -
         name: Setup virtualenvironment
         run:
-          mkdir .venv && pip3 install pipenv && pipenv install
+          mkdir .venv && pip3 install pipenv && pipenv install --dev
       -
         name: Upload artifacts
         uses: actions/upload-artifact@v3
@@ -58,9 +58,10 @@ jobs:
         run:
           pip3 install pipenv
       -
-        name: Setup tests
-        run:
-          pipenv install --dev
+        name: Download dependencies
+        uses: actions/download-artifact@v3
+        with:
+          name: init_pipenv
       -
         name: Run tests
         run:
@@ -72,10 +73,42 @@ jobs:
           name: junit_test_report
           path: results.xml
 
+  run_linter:
+    runs-on: "ubuntu-latest"
+    name: lint
+    needs: [ pipenv_init ]
+
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Setup Python
+        uses: actions/checkout@v3
+      -
+        name: Install pipenv
+        run:
+          pip3 install pipenv
+      -
+        name: Download dependencies
+        uses: actions/download-artifact@v3
+        with:
+          name: init_pipenv
+      -
+        name: Run linter
+        run:
+          pipenv run lint_ci --exit-zero --output-file gl-code-quality-report.json
+      -
+        name: Upload results
+        uses: actions/upload-artifact@v3
+        with:
+          name: codequality
+          path: gl-code-quality-report.json
+
   docker_build:
     runs-on: "ubuntu-latest"
-    name: docker-image-build
-    needs: [ pipenv_init, run_python_tests ]
+    name: build
+    needs: [ run_python_tests, run_linter ]
 
     steps:
     -
@@ -84,11 +117,6 @@ jobs:
     -
       name: Branch name
       run: echo running on branch ${GITHUB_REF##*/}
-    -
-      name: Get dependencies
-      uses: actions/download-artifact@v3
-      with:
-        name: init_pipenv
     -
       name: Build image
       env:
