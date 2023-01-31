@@ -33,13 +33,17 @@ jobs:
       -
         name: Setup virtualenvironment
         run:
-          mkdir .venv && pip3 install pipenv && pipenv install --dev
+          mkdir .venv && pip3 install pipenv && pipenv install --dev --keep-outdated
+      -
+        name: Pack artifacts
+        run:
+          tar -zcf pipenv.tar.gz .venv/
       -
         name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: init_pipenv
-          path: .venv
+          path: pipenv.tar.gz
 
   run_python_tests:
     runs-on: "ubuntu-latest"
@@ -62,7 +66,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: init_pipenv
-          path: .venv
+      -
+        name: Unpack virtualenvironment
+        run:
+          tar -xf pipenv.tar.gz
       -
         name: Run tests
         run:
@@ -95,7 +102,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: init_pipenv
-          path: .venv
+      -
+        name: Unpack virtualenvironment
+        run:
+          tar -xf pipenv.tar.gz
       -
         name: Run linter
         run:
