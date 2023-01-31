@@ -1,4 +1,4 @@
-from bot.cocparser import PrepareCoCPost
+from bot.cocparser import prepare_coc_post
 
 
 def test_cocfile_load(coc_test_data):
@@ -7,7 +7,7 @@ def test_cocfile_load(coc_test_data):
 
 
 def test_coc_prepare_post(coc_test_data):
-    prepared_posts = PrepareCoCPost(coc_test_data)
+    prepared_posts = prepare_coc_post(coc_test_data)
 
     assert 'preamble' in prepared_posts.keys()
     assert 'sections' in prepared_posts.keys()

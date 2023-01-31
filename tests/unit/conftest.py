@@ -1,5 +1,5 @@
 import pytest
-from bot.cocparser import CoCData, LoadCoCDataFromFile
+from bot.cocparser import CoCData, load_coc_data_from_file
 
 
 @pytest.fixture
@@ -10,5 +10,5 @@ def coc_test_data_path():
 @pytest.fixture
 def coc_test_data(coc_test_data_path):
     data = CoCData()
-    LoadCoCDataFromFile(data, coc_test_data_path)
+    load_coc_data_from_file(data, coc_test_data_path)
     return data
