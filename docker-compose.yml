@@ -3,8 +3,6 @@ services:
   thebot:
     image: br1armabot:master
     restart: always
-    environment:
-      - BOT_DEBUG_ENVIRONMENT=0
   bot_db:
     image: mariadb
     restart: always
