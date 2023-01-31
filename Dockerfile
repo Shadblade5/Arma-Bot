@@ -1,4 +1,4 @@
-FROM python:3.10.6
+FROM python:3.10.6-slim
 
 RUN mkdir -p /usr/src/unitbot
 WORKDIR /usr/src/unitbot
