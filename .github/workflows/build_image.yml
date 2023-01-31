@@ -22,8 +22,54 @@ permissions:
 # to be usable in other jobs, and to stop deployments from occuring if dependencies fail to install
 
 jobs:
-  docker-build:
+  pipenv_init:
+    name: pipenv-init
     runs-on: "ubuntu-latest"
+
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Setup virtualenvironment
+        run:
+          mkdir .venv && pip3 install pipenv && pipenv install
+      -
+        name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: init_pipenv
+          path: .venv
+
+  run_python_tests:
+    runs-on: "ubuntu-latest"
+    name: test-python
+    needs: pipenv_init
+
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Get dependencies
+        uses: actions/download-artifact@v3
+        with:
+          name: init_pipenv
+      -
+        name: Run tests
+        run:
+          pipenv run tests_ci
+      -
+        name: Upload results
+        uses: actions/upload-artifact@v3
+        with:
+          name: junit_test_report
+          path: results.xml
+
+  docker_build:
+    runs-on: "ubuntu-latest"
+    name: docker-image-build
+    needs: [ pipenv_init, run_python_tests ]
 
     steps:
     -
@@ -32,6 +78,11 @@ jobs:
     -
       name: Branch name
       run: echo running on branch ${GITHUB_REF##*/}
+    -
+      name: Get dependencies
+      uses: actions/download-artifact@v3
+      with:
+        name: init_pipenv
     -
       name: Build image
       env:

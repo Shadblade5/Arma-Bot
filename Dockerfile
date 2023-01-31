@@ -1,14 +1,10 @@
-FROM python:3.10.6
+FROM python:3.10.6-slim
 
 RUN mkdir -p /usr/src/unitbot
 WORKDIR /usr/src/unitbot
 
 COPY . .
 
-RUN apt-get update -y && apt-get install python3-pip -y
-RUN pip3 install pipenv && pipenv install
-
 RUN chmod 0755 runbot.sh
 
-ENTRYPOINT ["bash","/usr/src/unitbot/runbot.sh"]
-
+ENTRYPOINT ["sh","/usr/src/unitbot/runbot.sh"]
