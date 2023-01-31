@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands, tasks
-from bot import views, config, database
+import views
+import config
+import database
 import pytz
 import sys
 import os
