@@ -31,6 +31,9 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       -
+        name: Setup Python
+        uses: actions/setup-python@v4
+      -
         name: Setup virtualenvironment
         run:
           mkdir .venv && pip3 install pipenv && pipenv install
@@ -48,17 +51,24 @@ jobs:
 
     steps:
       -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Setup Python
+        uses: actions/checkout@v3
+      -
         name: Install pipenv
         run:
           pip3 install pipenv
-      -
-        name: Checkout
-        uses: actions/checkout@v3
       -
         name: Get dependencies
         uses: actions/download-artifact@v3
         with:
           name: init_pipenv
+      -
+        name: Setup tests
+        run:
+          pipenv install --dev
       -
         name: Run tests
         run:
