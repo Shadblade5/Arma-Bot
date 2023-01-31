@@ -7,7 +7,7 @@ class CoCData():
         self.__dict__.update(kwargs)
 
 
-def LoadCoCDataFromFile(data: CoCData, filepath: str):
+def load_coc_data_from_file(data: CoCData, filepath: str):
     try:
         data.construct(**json.loads(open(filepath).read())['coc'])
     except IOError:
@@ -18,7 +18,7 @@ def LoadCoCDataFromFile(data: CoCData, filepath: str):
         print('No `coc` key provided in file, cannot parse this CoC file')
 
 
-def PrepareCoCHeader(header: dict):
+def prepare_coc_header(header: dict):
     header_subposts = []
     for s in header['sections']:
         if s['type'] == 'paragraph':
@@ -44,7 +44,7 @@ def PrepareCoCHeader(header: dict):
     }
 
 
-def PrepareCoCSections(sections: list):
+def prepare_coc_sections(sections: list):
     coc_sections = []
 
     for section_idx, section in enumerate(sections):
@@ -66,9 +66,9 @@ def PrepareCoCSections(sections: list):
     return coc_sections
 
 
-def PrepareCoCPost(data: CoCData):
-    header_posts = PrepareCoCHeader(data.header)
-    section_posts = PrepareCoCSections(data.sections)
+def prepare_coc_post(data: CoCData):
+    header_posts = prepare_coc_header(data.header)
+    section_posts = prepare_coc_sections(data.sections)
 
     return {
         'preamble': header_posts,

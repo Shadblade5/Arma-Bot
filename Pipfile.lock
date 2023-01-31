@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3ae0b3ae46d0d68bc75d623bbc79120ec7e986ef94d6b1e85342f7861876ed55"
+            "sha256": "4ac213d079fd3417ca28ac8fce9bc5e731632b0d17f73c126787d9ea0f796bde"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -567,12 +567,26 @@
             "index": "pypi",
             "version": "==6.0.0"
         },
+        "flake8-blind-except": {
+            "hashes": [
+                "sha256:f25a575a9dcb3eeb3c760bf9c22db60b8b5a23120224ed1faa9a43f75dd7dd16"
+            ],
+            "index": "pypi",
+            "version": "==0.2.1"
+        },
         "flake8-gl-codeclimate": {
             "hashes": [
                 "sha256:7c0494fd5cdd59984aeadd8c839ba6affd4f8dfbd14ed3f1f6ec12dd2c62135d"
             ],
             "index": "pypi",
             "version": "==0.2.1"
+        },
+        "flake8-use-fstring": {
+            "hashes": [
+                "sha256:6550bf722585eb97dffa8343b0f1c372101f5c4ab5b07ebf0edd1c79880cdd39"
+            ],
+            "index": "pypi",
+            "version": "==1.4"
         },
         "freezegun": {
             "hashes": [
@@ -621,6 +635,14 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==23.0"
+        },
+        "pep8-naming": {
+            "hashes": [
+                "sha256:1705f046dfcd851378aac3be1cd1551c7c1e5ff363bacad707d43007877fa971",
+                "sha256:1a86b8c71a03337c97181917e2b472f0f5e4ccb06844a0d6f0a33522549e7a80"
+            ],
+            "index": "pypi",
+            "version": "==0.13.3"
         },
         "platformdirs": {
             "hashes": [

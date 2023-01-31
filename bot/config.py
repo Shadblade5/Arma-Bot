@@ -39,7 +39,7 @@ class ConfigContext():
         }
 
 
-def LoadConfig(filepath: str):
+def load_config(filepath: str):
     cfg = None
     try:
         with json.load(open(filepath).read()) as data:
@@ -59,7 +59,7 @@ def LoadConfig(filepath: str):
     return cfg
 
 
-def ConfigFromEnv():
+def create_config_from_environment():
     return ConfigContext(
         TOKEN=os.environ.get('BOT_TOKEN', ''),
         PREFIX=os.environ.get('BOT_COMMAND_PREFIX', ''),

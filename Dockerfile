@@ -3,7 +3,10 @@ FROM python:3.10.6-slim
 RUN mkdir -p /usr/src/unitbot
 WORKDIR /usr/src/unitbot
 
-RUN apt-get update -y && apt-get install python3-pip -y && pip3 install --no-cache-dir pipenv
+RUN apt-get update -y \
+    && apt-get install python3-pip -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip3 install --no-cache-dir pipenv
 
 COPY Pipfile* ./
 

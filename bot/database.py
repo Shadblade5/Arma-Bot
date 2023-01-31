@@ -14,7 +14,7 @@ class Database:
         self.db_name = db_name
         self.retries = 0
 
-    async def executeSQL(self, sql_query, query=True):
+    async def execute_sql(self, sql_query, query=True):
         try:
             print('Connecting to MYSQL...')
             client = sql.connect(host=self.db_host,
@@ -34,7 +34,7 @@ class Database:
             self.retries += 1
             print(f'Failed to connect,attempt #{self.retries}. Retrying...')
             if (self.retries < 60):
-                return await self.executeSQL(sql_query, query)
+                return await self.execute_sql(sql_query, query)
             else:
                 print('Server unresponsive.')
         except sql.IntegrityError as e:
@@ -46,33 +46,33 @@ class Database:
             print('Closing connection')
             client.close()
 
-    async def getUsers(self):
+    async def get_users(self):
         sql_query = 'SELECT * FROM master'
-        return await self.executeSQL(sql_query)
+        return await self.execute_sql(sql_query)
 
-    async def getUserInfo(self, DiscordID):
-        sql_query = f'SELECT * FROM master WHERE DISCORDID = {DiscordID}'
-        results = await self.executeSQL(sql=sql_query, query=True)
+    async def get_user_info(self, discord_id):
+        sql_query = f'SELECT * FROM master WHERE DISCORDID = {discord_id}'
+        results = await self.execute_sql(sql=sql_query, query=True)
         return results[0]
 
-    async def adduser(self, DiscordID, DiscordName):
+    async def adduser(self, discord_id, discord_name):
         now = datetime.now()
         dt_string = now.strftime(
             '%Y-%m-%d %H:%M:%S').astimezone(pytz.timezone('US/Eastern'))
-        sql_query = f"INSERT INTO `master` VALUES ('{DiscordID}','{DiscordName}','0','0','{dt_string}','NULL');"
-        if await self.executeSQL(sql_query, False) == 1:
+        sql_query = f"INSERT INTO `master` VALUES ('{discord_id}','{discord_name}','0','0','{dt_string}','NULL');"
+        if await self.execute_sql(sql_query, False) == 1:
             return False
         else:
             return True
 
     async def getcoc(self):
         sql_query = 'SELECT * FROM coc'
-        return await self.executeSQL(sql_query)
+        return await self.execute_sql(sql_query)
 
-    async def setBirthday(self, DiscordID, birthday):
-        sql_query = f"UPDATE `master` SET `Birthday` = '{birthday}' WHERE DISCORDID = '{DiscordID}'"
+    async def set_birthday(self, discord_id, birthday):
+        sql_query = f"UPDATE `master` SET `Birthday` = '{birthday}' WHERE DISCORDID = '{discord_id}'"
         try:
-            await self.executeSQL(sql_query, False)
-        except Exception:
+            await self.execute_sql(sql_query, False)
+        except Exception:  # noqa: B902
             return False
         return True

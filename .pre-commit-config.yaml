@@ -14,3 +14,13 @@
    rev: '6.0.0'
    hooks:
     - id: flake8
+      additional_dependencies: [
+        flake8-use-fstring,
+        flake8-blind-except,
+        pep8-naming
+      ]
+ - repo: https://github.com/AleksaC/hadolint-py
+   rev: 'v2.12.0.2'
+   hooks:
+    - id: hadolint
+      args: [--ignore, DL3008, --ignore, DL3013]

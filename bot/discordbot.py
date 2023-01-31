@@ -1,8 +1,7 @@
 import discord
 from discord.ext import commands, tasks
-import views
 import config
-# import database
+import database
 import pytz
 import sys
 import os
@@ -49,8 +48,8 @@ else:
 
 bot = commands.Bot(command_prefix=configuration.prefix,
                    description=description, intents=intents)
-# DB = database.Database(configuration.db_host, configuration.db_username,
-#                        configuration.db_password, database.DATABASE_NAME)
+DB = database.Database(configuration.db_host, configuration.db_username,
+                       configuration.db_password, database.DATABASE_NAME)
 
 
 @bot.event
@@ -72,12 +71,11 @@ async def playerlogger(ctx):
     em.thumbnail.height = 20
     em.title = f'{ctx.author.name}#{ctx.author.discriminator}'
     em.add_field(name='Command Used', value=ctx.command)
-    Args = ctx.message.content.split(
+    args = ctx.message.content.split(
         bot.command_prefix + ctx.command.name + ' ')
-    if (len(Args) > 1):
-        em.add_field(name='Arguments', value=Args[1], inline=False)
-    em.set_footer(text='{}'.format(
-        timestamp.strftime('%Y-%m-%d at %I:%M:%S %p %Z')))
+    if (len(args) > 1):
+        em.add_field(name='Arguments', value=args[1], inline=False)
+    em.set_footer(text=f'{timestamp.strftime("%Y-%m-%d at %I:%M:%S %p %Z")}')
     em.colour = discord.Colour.blue()
     await channel.send(embed=em)
 
@@ -190,7 +188,7 @@ async def startserver(ctx):
     send_magic_packet(LAN_WAKEUP_CODE)
 
 
-def RestartBot(filehandle):
+def restart_bot(filehandle):
     filehandle.seek(0)  # Return to top of file
     filehandle.write('0')
     filehandle.close()
@@ -203,7 +201,7 @@ def RestartBot(filehandle):
 async def check_for_restart():
     with open('restartflag.txt', 'r+') as f:
         if (f.readline(1) == '1'):
-            RestartBot(f)
+            restart_bot(f)
 
 
 @bot.command()
@@ -212,30 +210,30 @@ async def check_for_restart():
 async def rankup(ctx, member: discord.Member):
     # myguild = ctx.guild
     # guildroles = await myguild.fetch_roles()
-    memberRoles = member.roles
-    oldGrade = None
+    member_roles = member.roles
+    old_grade = None
     # oldGradeID = None
-    for role in memberRoles:
+    for role in member_roles:
         if ('Unit Grade' in role.name):
-            oldRole = role
-            oldGrade = role.name
+            old_role = role
+            old_grade = role.name
 
             # Todo(Cabal): Make this cleaner
-            oldgradeNumber = [int(x) for x in oldGrade.split() if x.isdigit()][0]
+            old_grade_num = [int(x) for x in old_grade.split() if x.isdigit()][0]
             # oldGradeID = role.id
-    if oldGrade is None:
+    if old_grade is None:
         await ctx.send(f'Error! {member.name} doesn\'t have a unit grade')
     else:
         # oldRole = discord.utils.get(ctx.guild.roles, name="Unit Grade {}".format(oldgradeNumber))
-        newRole = discord.utils.get(
-            ctx.guild.roles, name=f'Unit Grade {oldgradeNumber + 1}')
+        new_role = discord.utils.get(
+            ctx.guild.roles, name=f'Unit Grade {old_grade_num + 1}')
 
-        await member.add_roles(newRole, reason='Rankup')
-        await member.remove_roles(oldRole, reason='Rankup')
+        await member.add_roles(new_role, reason='Rankup')
+        await member.remove_roles(old_role, reason='Rankup')
 
-        await ctx.send(f'{member.name} ranked up to Unit Grade {oldgradeNumber + 1}')
+        await ctx.send(f'{member.name} ranked up to Unit Grade {old_grade_num + 1}')
 
-#Temp removed until database fix
+# Temp removed until database fix
 # @bot.command()
 # @commands.has_any_role(
 #     PERM_ROLE_OFFICER,
