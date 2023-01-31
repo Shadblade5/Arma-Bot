@@ -1,2 +1,2 @@
-echo "this is a test"
-pipenv run start 
+#!/bin/sh
+BOT_DEBUG_ENVIRONMENT=0 pipenv run start 

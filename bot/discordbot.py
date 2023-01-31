@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands, tasks
 import views
 import config
-import database
+# import database
 import pytz
 import sys
 import os
@@ -49,8 +49,8 @@ else:
 
 bot = commands.Bot(command_prefix=configuration.prefix,
                    description=description, intents=intents)
-DB = database.Database(configuration.db_host, configuration.db_username,
-                       configuration.db_password, database.DATABASE_NAME)
+# DB = database.Database(configuration.db_host, configuration.db_username,
+#                        configuration.db_password, database.DATABASE_NAME)
 
 
 @bot.event
@@ -235,31 +235,31 @@ async def rankup(ctx, member: discord.Member):
 
         await ctx.send(f'{member.name} ranked up to Unit Grade {oldgradeNumber + 1}')
 
-
-@bot.command()
-@commands.has_any_role(
-    PERM_ROLE_OFFICER,
-    PERM_ROLE_ADMINNCO,
-    PERM_ROLE_SENIORNCO
-)
-@commands.cooldown(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, ADDUSER_COOLDOWN_PERIOD, DISCORD_BUCKETTYPE_GUILD)
-@commands.max_concurrency(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, per=DISCORD_BUCKETTYPE_GUILD, wait=True)
-@commands.after_invoke(playerlogger)
-async def adduser(ctx, *args):
-    """Adds user to the database"""
-    view = views.ConfirmView()
-    await ctx.send(f'Confirmation to add {args[0]} to the database', view=view)
-    # Wait for the View to stop listening for input...
-    await view.wait()
-    if view.value is None:
-        await ctx.send('Timed out...')
-    elif view.value:
-        if (await DB.adduser(ctx.author.id, ctx.author.name)):
-            await ctx.send(f'Confirmed, adding {args[0]} to the database...')
-        else:
-            await ctx.send(f'{args[0]} already exists in the database.')
-    else:
-        await ctx.send(f'Cancelled...{args[0]} was not added.')
+#Temp removed until database fix
+# @bot.command()
+# @commands.has_any_role(
+#     PERM_ROLE_OFFICER,
+#     PERM_ROLE_ADMINNCO,
+#     PERM_ROLE_SENIORNCO
+# )
+# @commands.cooldown(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, ADDUSER_COOLDOWN_PERIOD, DISCORD_BUCKETTYPE_GUILD)
+# @commands.max_concurrency(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, per=DISCORD_BUCKETTYPE_GUILD, wait=True)
+# @commands.after_invoke(playerlogger)
+# async def adduser(ctx, *args):
+#     """Adds user to the database"""
+#     view = views.ConfirmView()
+#     await ctx.send(f'Confirmation to add {args[0]} to the database', view=view)
+#     # Wait for the View to stop listening for input...
+#     await view.wait()
+#     if view.value is None:
+#         await ctx.send('Timed out...')
+#     elif view.value:
+#         if (await DB.adduser(ctx.author.id, ctx.author.name)):
+#             await ctx.send(f'Confirmed, adding {args[0]} to the database...')
+#         else:
+#             await ctx.send(f'{args[0]} already exists in the database.')
+#     else:
+#         await ctx.send(f'Cancelled...{args[0]} was not added.')
 
 
 @bot.command()
@@ -275,7 +275,7 @@ async def reload(ctx, extension):
 async def setbirthday(ctx, month, day, year):
     birthday = f'{month}-{day}-{year}'
     await ctx.send(birthday)
-    DB.setBirthday(ctx.author.id, birthday)
+    # DB.setBirthday(ctx.author.id, birthday)
 
 
 @bot.event

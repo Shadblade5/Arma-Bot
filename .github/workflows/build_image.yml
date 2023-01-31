@@ -34,5 +34,12 @@ jobs:
       run: echo running on branch ${GITHUB_REF##*/}
     -
       name: Build image
+      env:
+        BOT_COMMAND_PREFIX: ${{ secrets.BOT_COMMAND_PREFIX}}
+        BOT_DB_HOST: ${{ secrets.BOT_DB_HOST}}
+        BOT_DB_PASSWORD: ${{ secrets.BOT_DB_PASSWORD}}
+        BOT_DB_USERNAME: ${{ secrets.BOT_DB_USERNAME}}
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN}}
+        BOT_TOKEN_DEV: ${{ secrets.BOT_TOKEN_DEV}}
       run: |
         docker build -t br1armabot:${GITHUB_REF##*/} .
