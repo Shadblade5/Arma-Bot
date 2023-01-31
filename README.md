@@ -1,5 +1,7 @@
 # BR1-BOT
 
+[![Build](https://github.com/Shadblade5/Arma-Bot/actions/workflows/build_image.yml/badge.svg)](https://github.com/Shadblade5/Arma-Bot/actions/workflows/build_image.yml)
+
 ## Setup for Development
 
 Create a new directory here named `.venv`, if you have hidden files/folders enabled, you should disable that so you can see it
