@@ -129,7 +129,7 @@ jobs:
     -
       name: Extract docker metadata
       id: meta
-      uses: docker/metadata-action
+      uses: docker/metadata-action@v4
       with:
         images: shadblade5/br1bot
         tags: |
