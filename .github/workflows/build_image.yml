@@ -131,7 +131,7 @@ jobs:
       id: meta
       uses: docker/metadata-action
       with:
-        images: <dockerhub-namespace>/br1bot
+        images: shadblade5/br1bot
         tags: |
           type=semver,pattern={{version}}
     -
