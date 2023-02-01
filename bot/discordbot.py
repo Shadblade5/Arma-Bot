@@ -43,8 +43,7 @@ DISCORD_BUCKETTYPE_GUILD = commands.BucketType.guild
 if BOT_DEBUG_ENVIRONMENT:
     configuration = config.LoadConfig(config.DEBUG_LOAD_CONFIG_PATH)
 else:
-    configuration = config.ConfigFromEnv()
-
+    configuration = config.create_config_from_environment()
 
 bot = commands.Bot(command_prefix=configuration.prefix,
                    description=description, intents=intents)
