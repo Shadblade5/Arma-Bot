@@ -1,0 +1,46 @@
+name: deploy_bot
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Which environment to deploy to'
+        required: true
+        type: 'choice'
+        options:
+          - dev
+      version:
+        description: 'Build docker-image tag to deploy (use latest for most recent release)'
+        required: true
+        type: 'string'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 10
+
+    steps:
+      - name: Deploy tag to host
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.BOTHOST }}
+          username: ${{ secrets.BOTHOST_DEPLOYUSER }}
+          key: ${{ secrets.BOTHOST_DEPLOYSSHKEY }}
+          port: ${{ secrets.BOTHOST_DEPLOYSSHPORT }}
+          timeout: 60s
+          script: |
+            sudo docker image prune -a && sudo docker pull shadblade5/br1bot:${{ inputs.version }}
+            cd br1bot_local && git fetch --tags && git checkout tags/${{ inputs.version }} -b ${{ inputs.version }}-release && git pull
+            export BOT_TOKEN=${{ secrets.BOT_TOKEN }}
+            export BOT_COMMAND_PREFIX=${{ secrets.BOT_COMMAND_PREFIX }}
+            export BOT_DB_HOST=db
+            export BOT_DB_USERNAME=${{ secrets.BOT_DB_USERNAME }}
+            export BOT_DB_PASSWORD=${{ secrets.BOT_DB_PASSWORD }}
+            export MARIADB_ROOT_PASSWORD=${{ secrets.DB_MASTER_PASSWORD }}
+            export MARIADB_USER=${{ secrets.BOT_DB_USERNAME }}
+            export MARIADB_PASSWORD=${{ secrets.BOT_DB_PASSWORD }}
+            export MARIADB_DATABASE=arma
+            docker-compose up -d
