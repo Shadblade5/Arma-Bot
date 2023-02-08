@@ -6,3 +6,5 @@ services:
   bot_db:
     image: mariadb
     restart: always
+    volumes:
+      - '/etc/br1bot/database/:/var/lib/mysql'
