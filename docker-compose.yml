@@ -3,8 +3,20 @@ services:
   thebot:
     image: deployed-br1bot:latest
     restart: always
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - BOT_COMMAND_PREFIX=${BOT_COMMAND_PREFIX}
+      - BOT_DB_HOST=${BOT_DB_HOST}
+      - BOT_DB_USERNAME=${BOT_DB_USERNAME}
+      - BOT_DB_PASSWORD=${BOT_DB_PASSWORD}
+
   bot_db:
     image: mariadb
     restart: always
     volumes:
       - '/etc/br1bot/database/:/var/lib/mysql'
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_USER=${BOT_DB_USERNAME}
+      - MARIADB_PASSWORD=${BOT_DB_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
