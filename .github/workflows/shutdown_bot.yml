@@ -1,0 +1,32 @@
+name: shutdown_bot
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Which environment to act on'
+        required: true
+        type: 'choice'
+        options:
+          - dev
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 10
+
+    steps:
+      - name: Deploy tag to host
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.BOTHOST }}
+          username: ${{ secrets.BOTHOST_DEPLOYUSER }}
+          key: ${{ secrets.BOTHOST_DEPLOYSSHKEY }}
+          port: ${{ secrets.BOTHOST_DEPLOYSSHPORT }}
+          timeout: 60s
+          script: |
+            cd br1bot_local
+            docker-compose down
