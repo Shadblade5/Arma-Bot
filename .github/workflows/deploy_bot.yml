@@ -34,7 +34,7 @@ jobs:
           script: |
             sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             sudo docker image prune -a -f && sudo docker pull ${{ secrets.DOCKER_USERNAME }}/br1bot:${{ inputs.version }}
-            sudo docker tag ${{ secrets.DOCKER_USERNAME }} deployed-br1bot:latest
+            sudo docker tag ${{ secrets.DOCKER_USERNAME }}/br1bot:${{ inputs.version }} deployed-br1bot:latest
             cd br1bot_local && git checkout master && git pull
             export BOT_TOKEN=${{ secrets.BOT_TOKEN }}
             export BOT_COMMAND_PREFIX=${{ secrets.BOT_COMMAND_PREFIX }}
