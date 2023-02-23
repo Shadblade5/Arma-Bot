@@ -32,7 +32,7 @@ jobs:
           port: ${{ secrets.BOTHOST_DEPLOYSSHPORT }}
           timeout: 60s
           script: |
-            sudo docker image prune -a && sudo docker pull shadblade5/br1bot:${{ inputs.version }}
+            sudo docker image prune -a -f && sudo docker pull shadblade5/br1bot:${{ inputs.version }}
             cd br1bot_local && git fetch --tags && git checkout tags/${{ inputs.version }} -b ${{ inputs.version }}-release && git pull
             export BOT_TOKEN=${{ secrets.BOT_TOKEN }}
             export BOT_COMMAND_PREFIX=${{ secrets.BOT_COMMAND_PREFIX }}
