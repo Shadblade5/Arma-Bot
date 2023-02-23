@@ -1,4 +1,4 @@
-name: deploy_bot
+name: Deploy Bot to Environment
 
 on:
   workflow_dispatch:

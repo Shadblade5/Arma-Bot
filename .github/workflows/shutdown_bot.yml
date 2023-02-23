@@ -1,4 +1,4 @@
-name: shutdown_bot
+name: Shutdown Bot on Environment
 
 on:
   workflow_dispatch:
