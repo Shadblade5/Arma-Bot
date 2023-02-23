@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   thebot:
-    image: br1bot:v0.1.0
+    image: deployed-br1bot:latest
     restart: always
   bot_db:
     image: mariadb
