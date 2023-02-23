@@ -1,0 +1,51 @@
+name: Deploy Devbot
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    types: [opened, synchronize]
+    branches: [ master ]
+
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Deploy tag to host
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.BOTHOST }}
+          username: ${{ secrets.BOTHOST_DEPLOYUSER }}
+          key: ${{ secrets.BOTHOST_DEPLOYSSHKEY }}
+          port: ${{ secrets.BOTHOST_DEPLOYSSHPORT }}
+          timeout: 60s
+          script: |
+            cd br1bot_local_dev && git checkout ${{ steps.extract_branch.outputs.branch }} && git pull
+            pipenv install
+            kill -9 `cat save_pid.txt`
+            export BOT_TOKEN=${{ secrets.BOT_TOKEN_DEV }}
+            export BOT_COMMAND_PREFIX=${{ secrets.BOT_COMMAND_PREFIX_DEV }}
+            export BOT_DB_HOST=bot_db
+            export BOT_DB_USERNAME=${{ secrets.BOT_DB_USERNAME }}
+            export BOT_DB_PASSWORD=${{ secrets.BOT_DB_PASSWORD }}
+            export MARIADB_ROOT_PASSWORD=${{ secrets.DB_MASTER_PASSWORD }}
+            export MARIADB_USER=${{ secrets.BOT_DB_USERNAME }}
+            export MARIADB_PASSWORD=${{ secrets.BOT_DB_PASSWORD }}
+            export MARIADB_DATABASE=armadev
+            export BOT_DEBUG_ENVIRONMENT=1
+            nohup sh runbot-debug.sh > devbot.log 2>&1 &
+            echo $! > save_pid.txt

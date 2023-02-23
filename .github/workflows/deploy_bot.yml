@@ -3,12 +3,6 @@ name: Deploy Bot to Environment
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'Which environment to deploy to'
-        required: true
-        type: 'choice'
-        options:
-          - dev
       version:
         description: 'Build docker-image tag to deploy (use latest for most recent release)'
         required: true
@@ -45,4 +39,5 @@ jobs:
             export MARIADB_USER=${{ secrets.BOT_DB_USERNAME }}
             export MARIADB_PASSWORD=${{ secrets.BOT_DB_PASSWORD }}
             export MARIADB_DATABASE=arma
+            export BOT_DEBUG_ENVIRONMENT=0
             docker-compose up -d
