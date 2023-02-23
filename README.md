@@ -23,3 +23,5 @@ Run the bot by executing `runbot.sh`
 Install Docker and docker-compose on the host machine.
 
 Deploy the bot by using `docker compose up -d` to deploy detached. To check status, use `docker compose ps` to view container statuses.
+
+Reference [here](https://hub.docker.com/_/mariadb) for info on the MariaDB docker image for the database.
