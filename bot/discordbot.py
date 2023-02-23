@@ -1,9 +1,8 @@
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands
 import config
 import database
 import pytz
-import sys
 import os
 from wakeonlan import send_magic_packet
 
@@ -18,7 +17,7 @@ LAN_WAKEUP_CODE = 'E0-D5-5E-28-75-DE'
 NEW_COC_CHANNEL_ID = 1053239585838215229
 BOT_LOG_CHANNEL_ID = 1066975056024064032
 
-PERM_ROLE_OFFICER = 'Officer'
+Director = 'Director'
 PERM_ROLE_ADMINNCO = 'Admin-NCO'
 PERM_ROLE_SENIORNCO = 'Senior-NCO'
 
@@ -58,7 +57,6 @@ async def on_ready():
     print(output)
     print('-' * len(output))
     await bot.change_presence(activity=BOT_ACTIVITY)
-    check_for_restart.start()
 
 
 async def playerlogger(ctx):
@@ -79,23 +77,23 @@ async def playerlogger(ctx):
     await channel.send(embed=em)
 
 
-@bot.event
-async def on_member_join(ctx):
-    await DB.adduser(ctx.id, ctx.name)
+# @bot.event
+# async def on_member_join(ctx):
+    # await DB.adduser(ctx.id, ctx.name)
 
 
-@bot.command(name='getusers')
-async def get_users(ctx):
-    await ctx.send(await DB.getUsers())
+# @bot.command(name='getusers')
+# async def get_users(ctx):
+#     await ctx.send(await DB.getUsers())
 
 
-@bot.command(name='getuserinfo')
-async def get_user_info(ctx):
-    message = await ctx.send('Getting user info...')
-    userinfo = await DB.getUserInfo(ctx.author.id)
-    await message.edit(
-        content=f'Name: {userinfo[1]}\nDiscordID: {userinfo[0]}\nGrade: {userinfo[2]}\nJoinDate: {userinfo[4]}\nBirthday: {userinfo[5]}'
-    )
+# @bot.command(name='getuserinfo')
+# async def get_user_info(ctx):
+#     message = await ctx.send('Getting user info...')
+#     userinfo = await DB.getUserInfo(ctx.author.id)
+#     await message.edit(
+#         content=f'Name: {userinfo[1]}\nDiscordID: {userinfo[0]}\nGrade: {userinfo[2]}\nJoinDate: {userinfo[4]}\nBirthday: {userinfo[5]}'
+#     )
 
 
 # @bot.command()
@@ -131,6 +129,7 @@ class COC:
 
 
 @bot.command()
+@commands.has_any_role(Director)
 async def createcoc(ctx):
     channel = bot.get_channel(NEW_COC_CHANNEL_ID)  # new-code-of-conduct
     print('Getting COC DATA')
@@ -181,30 +180,14 @@ async def createcoc(ctx):
 
 
 @bot.command()
-@commands.has_any_role(PERM_ROLE_OFFICER, PERM_ROLE_ADMINNCO)
+@commands.has_any_role(Director)
 async def startserver(ctx):
     await ctx.send('Attempting to start server, please wait...')
     send_magic_packet(LAN_WAKEUP_CODE)
 
 
-def restart_bot(filehandle):
-    filehandle.seek(0)  # Return to top of file
-    filehandle.write('0')
-    filehandle.close()
-    print('Restarting....')
-    # os.execv(sys.executable, ['python'] + sys.argv)
-    sys.exit()  # If running in a docker container with restart_always, this should automatically restart the bot
-
-
-@tasks.loop(minutes=1)
-async def check_for_restart():
-    with open('restartflag.txt', 'r+') as f:
-        if (f.readline(1) == '1'):
-            restart_bot(f)
-
-
 @bot.command()
-@commands.has_any_role(PERM_ROLE_OFFICER)
+@commands.has_any_role(Director)
 @commands.after_invoke(playerlogger)
 async def rankup(ctx, member: discord.Member):
     # myguild = ctx.guild
