@@ -16,7 +16,7 @@ intents.members = True
 LAN_WAKEUP_CODE = 'E0-D5-5E-28-75-DE'
 
 NEW_COC_CHANNEL_ID = 1053239585838215229
-BOT_LOG_CHANNEL_ID = 1066975056024064032
+BOT_LOG_CHANNEL_ID = 941879875059449946
 
 Director = 1066598944701960192
 CertSepRole = 978788249726226463
@@ -25,7 +25,8 @@ CampSepRole = 1066967939024175154
 DLCSepRole = 978786976050339941
 NeedBCCRole = 992820081602088981
 
-RolesOnAdd = {CertSepRole, RankSepRole, CampSepRole, DLCSepRole}
+
+RoleSeperators = {CertSepRole, RankSepRole, CampSepRole, DLCSepRole}
 
 # BOT_ACTIVITY_TYPE = discord.ActivityType.watching
 # BOT_ACTIVITY_TEXT = 'the server burn'
@@ -226,44 +227,43 @@ async def rankup(ctx, member: discord.Member):
 
 
 @bot.command()
-@commands.has_role(1066599760699600957)
-@commands.cooldown(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, ADDUSER_COOLDOWN_PERIOD, DISCORD_BUCKETTYPE_GUILD)
+@commands.has_any_role('Trainer', 'Director')
+# @commands.cooldown(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, ADDUSER_COOLDOWN_PERIOD, DISCORD_BUCKETTYPE_GUILD)
 @commands.max_concurrency(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, per=DISCORD_BUCKETTYPE_GUILD, wait=True)
 @commands.after_invoke(playerlogger)
 async def adduser(ctx, member: discord.Member, bcc: bool):
     """Adds user to the database"""
     view = views.ConfirmView()
-    await ctx.send(f'Confirmation to add {member.display_name} to the unit', view=view)
+    await ctx.send_message(f'Confirmation to add {member.display_name} to the unit', view=view)
     # Wait for the View to stop listening for input...
     await view.wait()
-    if view.value is None:
-        await ctx.send('Timed out...')
-    elif view.value:
+    if view.value:
+        await member.add_roles(discord.utils.get(ctx.guild.roles, name='Unit Grade 1'))
+        await member.add_roles(discord.utils.get(ctx.guild.roles, name='Unit Member'))
+        for role in RoleSeperators:
+            await member.add_roles(discord.utils.get(ctx.guild.roles, id=role))
         if bcc:
-            RolesOnAdd.add(NeedBCCRole)
-
-        await member.add_roles(RolesOnAdd)
+            await member.add_roles(discord.utils.get(ctx.guild.roles, name='Need BCC Cert'))
+        await member.remove_roles(discord.utils.get(ctx.guild.roles, name='On The Fence'))
         # if (await DB.adduser(ctx.author.id, ctx.author.name)):
         #     await ctx.send(f'Confirmed, adding {args[0]} to the database...')
         # else:
         #     await ctx.send(f'{args[0]} already exists in the database.')
-    else:
-        await ctx.send(f'Cancelled...{member.display_name} was not added to the unit.')
 
 
-@bot.command()
-@commands.is_owner()
-async def reload(ctx, extension):
-    await bot.reload_extension(f'cogs.{extension}')
-    embed = discord.Embed(
-        title='Reloaded', description=f'{extension} successfully reloaded!', color=0xff00c8)
-    await ctx.send(embed=embed)
+# @bot.command()
+# @commands.is_owner()
+# async def reload(ctx, extension):
+#     await bot.reload_extension(f'cogs.{extension}')
+#     embed = discord.Embed(
+#         title='Reloaded', description=f'{extension} successfully reloaded!', color=0xff00c8)
+#     await ctx.send(embed=embed)
 
 
-@bot.command()
-async def setbirthday(ctx, month, day, year):
-    birthday = f'{month}-{day}-{year}'
-    await ctx.send(birthday)
+# @bot.command()
+# async def setbirthday(ctx, month, day, year):
+#     birthday = f'{month}-{day}-{year}'
+#     await ctx.send(birthday)
     # DB.setBirthday(ctx.author.id, birthday)
 
 
