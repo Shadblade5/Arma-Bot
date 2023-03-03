@@ -1,7 +1,7 @@
 import json
 import os
 
-DEBUG_LOAD_CONFIG_PATH = '/home/raspiserver/Documents/armaPython/config.json'
+DEBUG_LOAD_CONFIG_PATH = 'C:\\Users\\Shadblade5\\github\\Arma-Bot\\config.json'
 
 
 class ConfigContext():
@@ -42,20 +42,21 @@ class ConfigContext():
 def load_config(filepath: str):
     cfg = None
     try:
-        with json.load(open(filepath).read()) as data:
-            cfg = ConfigContext(
-                TOKEN=data['TOKEN'],
-                PREFIX=data['PREFIX'],
-                DBHOST=data['DBHOST'],
-                DBUSERNAME=data['DBUSERNAME'],
-                DBPASS=data['DBPASS']
-            )
+        f = open(filepath, mode='r')
+        data = json.load(f)
+        cfg = ConfigContext(
+            TOKEN=data['TOKEN'],
+            PREFIX=data['PREFIX'],
+            DBHOST=data['DBHOST'],
+            DBUSERNAME=data['DBUSERNAME'],
+            DBPASS=data['DBPASS']
+        )
     except json.JSONDecodeError:
-        print('Failed to parse JSON Configuration!')
+        print('Failed to parse JSON Configuration!\n')
     except IOError:
-        print('Failed to read config file!')
+        print('Failed to read config file!\n')
     except LookupError:
-        print('Configuration key not found!')
+        print('Configuration key not found!\n')
     return cfg
 
 

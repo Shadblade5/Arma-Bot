@@ -5,6 +5,7 @@ import database
 import pytz
 import os
 from wakeonlan import send_magic_packet
+import views
 
 description = '''Here are the following commands available.'''
 
@@ -17,13 +18,18 @@ LAN_WAKEUP_CODE = 'E0-D5-5E-28-75-DE'
 NEW_COC_CHANNEL_ID = 1053239585838215229
 BOT_LOG_CHANNEL_ID = 1066975056024064032
 
-Director = 'Director'
-PERM_ROLE_ADMINNCO = 'Admin-NCO'
-PERM_ROLE_SENIORNCO = 'Senior-NCO'
+Director = 1066598944701960192
+CertSepRole = 978788249726226463
+RankSepRole = 1069114415842074684
+CampSepRole = 1066967939024175154
+DLCSepRole = 978786976050339941
+NeedBCCRole = 992820081602088981
 
-BOT_ACTIVITY_TYPE = discord.ActivityType.watching
-BOT_ACTIVITY_TEXT = 'the server burn'
-BOT_ACTIVITY = discord.Activity(type=BOT_ACTIVITY_TYPE, name=BOT_ACTIVITY_TEXT)
+RolesOnAdd = {CertSepRole, RankSepRole, CampSepRole, DLCSepRole}
+
+# BOT_ACTIVITY_TYPE = discord.ActivityType.watching
+# BOT_ACTIVITY_TEXT = 'the server burn'
+# BOT_ACTIVITY = discord.Activity(type=BOT_ACTIVITY_TYPE, name=BOT_ACTIVITY_TEXT)
 
 BOT_TIMEZONE = pytz.timezone('US/Eastern')
 
@@ -40,7 +46,7 @@ DISCORD_BUCKETTYPE_GUILD = commands.BucketType.guild
 
 
 if BOT_DEBUG_ENVIRONMENT:
-    configuration = config.LoadConfig(config.DEBUG_LOAD_CONFIG_PATH)
+    configuration = config.load_config(config.DEBUG_LOAD_CONFIG_PATH)
 else:
     configuration = config.create_config_from_environment()
 
@@ -56,7 +62,7 @@ async def on_ready():
     output = bot.user.name + ' ID:' + str(bot.user.id)
     print(output)
     print('-' * len(output))
-    await bot.change_presence(activity=BOT_ACTIVITY)
+    # await bot.change_presence(activity=BOT_ACTIVITY)
 
 
 async def playerlogger(ctx):
@@ -77,10 +83,11 @@ async def playerlogger(ctx):
     await channel.send(embed=em)
 
 
-# @bot.event
-# async def on_member_join(ctx):
-    # await DB.adduser(ctx.id, ctx.name)
+@bot.event
+async def on_member_join(ctx):
+    await ctx.member.roles.add(992820081602088981)
 
+    # await DB.adduser(ctx.id, ctx.name)
 
 # @bot.command(name='getusers')
 # async def get_users(ctx):
@@ -216,30 +223,32 @@ async def rankup(ctx, member: discord.Member):
         await ctx.send(f'{member.name} ranked up to Unit Grade {old_grade_num + 1}')
 
 # Temp removed until database fix
-# @bot.command()
-# @commands.has_any_role(
-#     PERM_ROLE_OFFICER,
-#     PERM_ROLE_ADMINNCO,
-#     PERM_ROLE_SENIORNCO
-# )
-# @commands.cooldown(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, ADDUSER_COOLDOWN_PERIOD, DISCORD_BUCKETTYPE_GUILD)
-# @commands.max_concurrency(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, per=DISCORD_BUCKETTYPE_GUILD, wait=True)
-# @commands.after_invoke(playerlogger)
-# async def adduser(ctx, *args):
-#     """Adds user to the database"""
-#     view = views.ConfirmView()
-#     await ctx.send(f'Confirmation to add {args[0]} to the database', view=view)
-#     # Wait for the View to stop listening for input...
-#     await view.wait()
-#     if view.value is None:
-#         await ctx.send('Timed out...')
-#     elif view.value:
-#         if (await DB.adduser(ctx.author.id, ctx.author.name)):
-#             await ctx.send(f'Confirmed, adding {args[0]} to the database...')
-#         else:
-#             await ctx.send(f'{args[0]} already exists in the database.')
-#     else:
-#         await ctx.send(f'Cancelled...{args[0]} was not added.')
+
+
+@bot.command()
+@commands.has_role(1066599760699600957)
+@commands.cooldown(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, ADDUSER_COOLDOWN_PERIOD, DISCORD_BUCKETTYPE_GUILD)
+@commands.max_concurrency(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, per=DISCORD_BUCKETTYPE_GUILD, wait=True)
+@commands.after_invoke(playerlogger)
+async def adduser(ctx, member: discord.Member, bcc: bool):
+    """Adds user to the database"""
+    view = views.ConfirmView()
+    await ctx.send(f'Confirmation to add {member.display_name} to the unit', view=view)
+    # Wait for the View to stop listening for input...
+    await view.wait()
+    if view.value is None:
+        await ctx.send('Timed out...')
+    elif view.value:
+        if bcc:
+            RolesOnAdd.add(NeedBCCRole)
+
+        await member.add_roles(RolesOnAdd)
+        # if (await DB.adduser(ctx.author.id, ctx.author.name)):
+        #     await ctx.send(f'Confirmed, adding {args[0]} to the database...')
+        # else:
+        #     await ctx.send(f'{args[0]} already exists in the database.')
+    else:
+        await ctx.send(f'Cancelled...{member.display_name} was not added to the unit.')
 
 
 @bot.command()
