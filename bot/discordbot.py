@@ -1,10 +1,12 @@
 import discord
 from discord.ext import commands
+from discord.ext import tasks
 import config
 import database
 import pytz
 import os
 from wakeonlan import send_magic_packet
+import serverstatus
 import views
 
 description = '''Here are the following commands available.'''
@@ -63,7 +65,30 @@ async def on_ready():
     output = bot.user.name + ' ID:' + str(bot.user.id)
     print(output)
     print('-' * len(output))
+    getserverstatus.start(bot.get_guild(602809092049862686))
     # await bot.change_presence(activity=BOT_ACTIVITY)
+
+
+@tasks.loop(minutes=5)
+async def getserverstatus(guild):
+    trainingserverchannel = await guild.fetch_channel(1067331029154664478)
+    operationsserverchannel = await guild.fetch_channel(1067333212516401223)
+    serverstatuses = await serverstatus.get_servers()
+    trainingserver = 'Offline'
+    operationsserver = 'Offline'
+    for server in serverstatuses:
+        training_server_player_count = server['players']
+        op_server_player_count = server['players']
+        if ('RCOG Training Server' in server.get('name')):
+            trainingserver = f'Online - {training_server_player_count} players'
+        if ('RCOG Operations Server' in server.get('name')):
+            operationsserver = f'Online - {op_server_player_count} players'
+
+    if (trainingserverchannel.name != trainingserver):
+        await trainingserverchannel.edit(name=trainingserver)
+
+    if (operationsserverchannel.name != operationsserver):
+        await operationsserverchannel.edit(name=operationsserver)
 
 
 async def playerlogger(ctx):
