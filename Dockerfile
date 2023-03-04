@@ -17,4 +17,4 @@ COPY . .
 
 RUN chmod 0755 runbot.sh
 
-ENTRYPOINT ["sh","/usr/src/unitbot/runbot.sh"]
+ENTRYPOINT ["/usr/src/unitbot/runbot.sh"]
