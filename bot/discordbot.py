@@ -256,8 +256,8 @@ async def rankup(ctx, member: discord.Member):
 # @commands.cooldown(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, ADDUSER_COOLDOWN_PERIOD, DISCORD_BUCKETTYPE_GUILD)
 @commands.max_concurrency(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, per=DISCORD_BUCKETTYPE_GUILD, wait=True)
 @commands.after_invoke(playerlogger)
-async def adduser(ctx, member: discord.Member, bcc: bool):
-    """Adds user to the database"""
+async def adduser(ctx, member: discord.Member):
+    """Adds user to the unit. Args: <User Mention or ID>"""
     view = views.ConfirmView()
     await ctx.send_message(f'Confirmation to add {member.display_name} to the unit', view=view)
     # Wait for the View to stop listening for input...
@@ -267,8 +267,7 @@ async def adduser(ctx, member: discord.Member, bcc: bool):
         await member.add_roles(discord.utils.get(ctx.guild.roles, name='Unit Member'))
         for role in RoleSeperators:
             await member.add_roles(discord.utils.get(ctx.guild.roles, id=role))
-        if bcc:
-            await member.add_roles(discord.utils.get(ctx.guild.roles, name='Need BCC Cert'))
+        await member.add_roles(discord.utils.get(ctx.guild.roles, name='Need BCC Cert'))
         await member.remove_roles(discord.utils.get(ctx.guild.roles, name='On The Fence'))
         # if (await DB.adduser(ctx.author.id, ctx.author.name)):
         #     await ctx.send(f'Confirmed, adding {args[0]} to the database...')
