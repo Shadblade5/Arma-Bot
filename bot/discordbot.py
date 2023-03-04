@@ -252,7 +252,7 @@ async def rankup(ctx, member: discord.Member):
 
 
 @bot.command()
-@commands.has_any_role('Trainer', 'Director')
+@commands.has_any_role('Recruiter', 'Director')
 # @commands.cooldown(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, ADDUSER_COOLDOWN_PERIOD, DISCORD_BUCKETTYPE_GUILD)
 @commands.max_concurrency(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, per=DISCORD_BUCKETTYPE_GUILD, wait=True)
 @commands.after_invoke(playerlogger)
