@@ -26,7 +26,7 @@ RankSepRole = 1069114415842074684
 CampSepRole = 1066967939024175154
 DLCSepRole = 978786976050339941
 NeedBCCRole = 992820081602088981
-
+AsstDirector = 1066599022883770389
 
 RoleSeperators = {CertSepRole, RankSepRole, CampSepRole, DLCSepRole}
 
@@ -213,7 +213,7 @@ async def createcoc(ctx):
 
 
 @bot.command()
-@commands.has_any_role(Director)
+@commands.has_any_role(Director, AsstDirector)
 async def startserver(ctx):
     await ctx.send('Attempting to start server, please wait...')
     send_magic_packet(LAN_WAKEUP_CODE)
