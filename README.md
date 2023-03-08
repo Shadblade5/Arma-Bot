@@ -1,4 +1,4 @@
-# BR1-BOT
+# RCOG-Bot
 
 [![Build](https://github.com/Shadblade5/Arma-Bot/actions/workflows/build_image.yml/badge.svg)](https://github.com/Shadblade5/Arma-Bot/actions/workflows/build_image.yml)
 
