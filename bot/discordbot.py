@@ -11,24 +11,27 @@ import views
 
 description = '''Here are the following commands available.'''
 
-intents = discord.Intents.default()
-intents.message_content = True
-intents.members = True
 
 LAN_WAKEUP_CODE = 'E0-D5-5E-28-75-DE'
 
-NEW_COC_CHANNEL_ID = 1053239585838215229
+COC_CHANNEL_ID = 1053239585838215229
 BOT_LOG_CHANNEL_ID = 941879875059449946
+LOBBY_CHANNEL_ID = 661146436804542485
+FAQ_CHANNEL_ID = 603056411446083584
 
-Director = 1066598944701960192
-CertSepRole = 978788249726226463
-RankSepRole = 1069114415842074684
-CampSepRole = 1066967939024175154
-DLCSepRole = 978786976050339941
-NeedBCCRole = 992820081602088981
-AsstDirector = 1066599022883770389
+GUILD_ID = 602809092049862686
+# ROLES
+DIRECTOR_ROLE = 1066598944701960192
+CERT_SEP_ROLE = 978788249726226463
+RANK_SEP_ROLE = 1069114415842074684
+CAMPAIGN_SEP_ROLE = 1066967939024175154
+DLC_SEP_ROLE = 978786976050339941
+NEED_BCC_ROLE = 992820081602088981
+ASSIST_DIRECTOR_ROLE = 1066599022883770389
+RECRUITER_ROLE = 1066599661739196416
+ON_THE_FENCE_ROLE = 661748761952780304
 
-RoleSeperators = {CertSepRole, RankSepRole, CampSepRole, DLCSepRole}
+ROLE_SEPERATORS = {CERT_SEP_ROLE, RANK_SEP_ROLE, CAMPAIGN_SEP_ROLE, DLC_SEP_ROLE}
 
 # BOT_ACTIVITY_TYPE = discord.ActivityType.watching
 # BOT_ACTIVITY_TEXT = 'the server burn'
@@ -47,26 +50,45 @@ ADDUSER_COOLDOWN_PERIOD = 60
 
 DISCORD_BUCKETTYPE_GUILD = commands.BucketType.guild
 
+botintents = discord.Intents.default()
+botintents.message_content = True
+botintents.members = True
 
 if BOT_DEBUG_ENVIRONMENT:
     configuration = config.load_config(config.DEBUG_LOAD_CONFIG_PATH)
 else:
     configuration = config.create_config_from_environment()
 
-bot = commands.Bot(command_prefix=configuration.prefix,
-                   description=description, intents=intents)
-DB = database.Database(configuration.db_host, configuration.db_username,
-                       configuration.db_password, database.DATABASE_NAME)
+
+class TheBot(commands.Bot):
+    def __init__(self):
+        super().__init__(command_prefix=configuration.prefix, description=description, intents=botintents)
+        self.synced = False
+        self.viewsAdded = False
+        self.DB = database.Database(configuration.db_host, configuration.db_username,
+                                    configuration.db_password, database.DATABASE_NAME)
+
+    async def on_ready(self):
+        self.guild = self.get_guild(GUILD_ID)
+        print('Logged in as')
+        output = self.user.name + ' ID:' + str(self.user.id)
+        print(output)
+        print('-' * len(output))
+        getserverstatus.start(self.guild)
+        # if not self.synced
+        #     await tree.sync(guild = discord.Object(id=guild_id))
+        if not self.viewsAdded:
+            # self.add_view(trainingRoleView())
+            self.viewsAdded = True
+        # await bot.change_presence(activity=BOT_ACTIVITY)
 
 
-@bot.event
-async def on_ready():
-    print('Logged in as')
-    output = bot.user.name + ' ID:' + str(bot.user.id)
-    print(output)
-    print('-' * len(output))
-    getserverstatus.start(bot.get_guild(602809092049862686))
-    # await bot.change_presence(activity=BOT_ACTIVITY)
+bot = TheBot()
+
+
+@bot.command()
+async def testselector(ctx: commands.Context):
+    await ctx.send('Test!', view=views.trainingRoleView())
 
 
 @tasks.loop(minutes=5)
@@ -110,8 +132,22 @@ async def playerlogger(ctx):
 
 
 @bot.event
-async def on_member_join(ctx):
-    await ctx.member.roles.add(992820081602088981)
+async def on_member_join(ctx: discord.Member):
+    lobby = bot.get_channel(LOBBY_CHANNEL_ID)
+    await lobby.send(
+        f'<@{ctx.id}>\n' +
+        'Welcome to Redline Combat Operations Group. ' +
+        'We are a realistic mil-sim Arma 3 unit that hosts custom campaigns and standalone operations. ' +
+        'Each of these campaigns are designed with their own setting and story to create a cohesive set of ' +
+        'immersive operations for you to enjoy along with us.\n' +
+        f'Hopefully, by the time you’re done reading this, a <@&{RECRUITER_ROLE}> will have messaged you ' +
+        'to answer any of your questions and introduce you to the unit. ' +
+        'If not, please feel free to ping any of the recruiters.\n ' +
+        f'While you wait, feel free to read our <#{COC_CHANNEL_ID}> as well as our <#{FAQ_CHANNEL_ID}> to become ' +
+        'familiar with our community rules. '
+
+    )
+    await ctx.add_roles(discord.utils.get(ctx.guild.roles, id=ON_THE_FENCE_ROLE))
 
     # await DB.adduser(ctx.id, ctx.name)
 
@@ -149,78 +185,78 @@ async def on_member_join(ctx):
 # async def updateCoC(ctx):
 #     channel = bot.get_channel(1050527640848695296)
 
-class COC:
-    em = 0
-    thread = 0
+# class COC:
+#     em = 0
+#     thread = 0
 
-    def __init__(self, *args):
-        self.Section = args[0]
-        self.Subsection = args[1]
-        self.Item = args[2]
-        self.Title = args[3]
-        self.Description = args[4]
+#     def __init__(self, *args):
+#         self.Section = args[0]
+#         self.Subsection = args[1]
+#         self.Item = args[2]
+#         self.Title = args[3]
+#         self.Description = args[4]
+
+
+# @bot.command()
+# @commands.has_any_role(DIRECTOR_ROLE)
+# async def createcoc(ctx):
+#     channel = bot.get_channel(NEW_COC_CHANNEL_ID)  # new-code-of-conduct
+#     print('Getting COC DATA')
+#     # threads = []
+#     coc = await DB.getcoc()
+#     # sorted_coc = sorted(
+#     #     coc,
+#     #     key=lambda t: (t[0], t[1], t[2])
+#     # )
+#     for code in coc:
+#         # print('{}.{}.{} {}'.format(*code))
+
+#         current_code = COC(*code)
+#         # print(f'Current: {current_code.Section}.{current_code.Subsection}.{current_code.Item}')
+#         last_code = None
+
+#         if (current_code.Section == 0):
+#             if (current_code.Subsection == 0):
+#                 current_code.em = discord.Embed()
+#                 current_code.em.title = current_code.Title
+#                 current_code.em.description = current_code.Description
+#                 await channel.send(embed=current_code.em)
+#             else:
+#                 if (current_code.Item == 0):
+#                     message = await channel.send(embed=discord.Embed(title=current_code.Title))
+#                     definitions_thread = await message.create_thread(name=current_code.Title)
+#                 else:
+#                     await definitions_thread.send(
+#                         embed=discord.Embed(title=current_code.Title, description=current_code.Description))
+#         else:
+#             if (current_code.Subsection == 0):
+#                 message = await channel.send(embed=discord.Embed(
+#                     title=f'{current_code.Section}.{current_code.Subsection}.{current_code.Item} {current_code.Title}'))
+#                 current_thread = await message.create_thread(name=current_code.Title)
+#             else:
+#                 if current_code.Item == 0:
+#                     current_code.em = discord.Embed()
+#                     current_code.em.title = f'{current_code.Section}.{current_code.Subsection}.{current_code.Item} {current_code.Title}'
+#                     current_code.em.description = current_code.Description
+#                     if current_code.Subsection > 1:
+#                         await current_thread.send(embed=last_code.em)
+#                 else:
+#                     current_code.em = last_code.em
+#                     current_code.em.add_field(
+#                         name=current_code.Title, value=current_code.Description, inline=False)
+
+#         last_code = current_code
 
 
 @bot.command()
-@commands.has_any_role(Director)
-async def createcoc(ctx):
-    channel = bot.get_channel(NEW_COC_CHANNEL_ID)  # new-code-of-conduct
-    print('Getting COC DATA')
-    # threads = []
-    coc = await DB.getcoc()
-    # sorted_coc = sorted(
-    #     coc,
-    #     key=lambda t: (t[0], t[1], t[2])
-    # )
-    for code in coc:
-        # print('{}.{}.{} {}'.format(*code))
-
-        current_code = COC(*code)
-        # print(f'Current: {current_code.Section}.{current_code.Subsection}.{current_code.Item}')
-        last_code = None
-
-        if (current_code.Section == 0):
-            if (current_code.Subsection == 0):
-                current_code.em = discord.Embed()
-                current_code.em.title = current_code.Title
-                current_code.em.description = current_code.Description
-                await channel.send(embed=current_code.em)
-            else:
-                if (current_code.Item == 0):
-                    message = await channel.send(embed=discord.Embed(title=current_code.Title))
-                    definitions_thread = await message.create_thread(name=current_code.Title)
-                else:
-                    await definitions_thread.send(
-                        embed=discord.Embed(title=current_code.Title, description=current_code.Description))
-        else:
-            if (current_code.Subsection == 0):
-                message = await channel.send(embed=discord.Embed(
-                    title=f'{current_code.Section}.{current_code.Subsection}.{current_code.Item} {current_code.Title}'))
-                current_thread = await message.create_thread(name=current_code.Title)
-            else:
-                if current_code.Item == 0:
-                    current_code.em = discord.Embed()
-                    current_code.em.title = f'{current_code.Section}.{current_code.Subsection}.{current_code.Item} {current_code.Title}'
-                    current_code.em.description = current_code.Description
-                    if current_code.Subsection > 1:
-                        await current_thread.send(embed=last_code.em)
-                else:
-                    current_code.em = last_code.em
-                    current_code.em.add_field(
-                        name=current_code.Title, value=current_code.Description, inline=False)
-
-        last_code = current_code
-
-
-@bot.command()
-@commands.has_any_role(Director, AsstDirector)
+@commands.has_any_role(DIRECTOR_ROLE, ASSIST_DIRECTOR_ROLE)
 async def startserver(ctx):
     await ctx.send('Attempting to start server, please wait...')
     send_magic_packet(LAN_WAKEUP_CODE)
 
 
 @bot.command()
-@commands.has_any_role(Director)
+@commands.has_any_role(DIRECTOR_ROLE)
 @commands.after_invoke(playerlogger)
 async def rankup(ctx, member: discord.Member):
     # myguild = ctx.guild
@@ -254,7 +290,6 @@ async def rankup(ctx, member: discord.Member):
 @bot.command()
 @commands.has_any_role('Recruiter', 'Director')
 # @commands.cooldown(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, ADDUSER_COOLDOWN_PERIOD, DISCORD_BUCKETTYPE_GUILD)
-@commands.max_concurrency(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, per=DISCORD_BUCKETTYPE_GUILD, wait=True)
 @commands.after_invoke(playerlogger)
 async def adduser(ctx, member: discord.Member):
     """Adds user to the unit. Args: <User Mention or ID>"""
@@ -265,7 +300,7 @@ async def adduser(ctx, member: discord.Member):
     if view.value:
         await member.add_roles(discord.utils.get(ctx.guild.roles, name='Unit Grade 1'))
         await member.add_roles(discord.utils.get(ctx.guild.roles, name='Unit Member'))
-        for role in RoleSeperators:
+        for role in ROLE_SEPERATORS:
             await member.add_roles(discord.utils.get(ctx.guild.roles, id=role))
         await member.add_roles(discord.utils.get(ctx.guild.roles, name='Need BCC Cert'))
         await member.remove_roles(discord.utils.get(ctx.guild.roles, name='On The Fence'))
