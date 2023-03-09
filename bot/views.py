@@ -1,7 +1,8 @@
-from discord import ui, ButtonStyle, Interaction
-
+from discord import ui, ButtonStyle, Interaction, Role
 
 # Define a simple View that gives us a confirmation menu
+
+
 class ConfirmView(ui.View):
     def __init__(self):
         super().__init__()
@@ -22,3 +23,21 @@ class ConfirmView(ui.View):
         await interaction.response.send_message('Cancelled', ephemeral=True)
         self.value = False
         self.stop()
+
+
+class JoinCampaignButton(ui.Button):
+    def __init__(self, role: Role = None):
+        super().__init__(label='Join This Campaign', style=ButtonStyle.green, custom_id=role.name)
+        self.role = role
+
+    async def callback(self, interaction: Interaction):
+        await interaction.response.send_message('Campaign Joined', ephemeral=True)
+        await interaction.user.add_roles(self.role)
+
+
+class CampaignButtonView(ui.View):
+    def __init__(self, role: Role):
+        super().__init__(timeout=None)
+        button = JoinCampaignButton(role=role)
+        self.add_item(button)
+        self.is_persistent = True

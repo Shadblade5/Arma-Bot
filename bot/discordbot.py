@@ -65,8 +65,10 @@ async def on_ready():
     output = bot.user.name + ' ID:' + str(bot.user.id)
     print(output)
     print('-' * len(output))
-    getserverstatus.start(bot.get_guild(602809092049862686))
+    # bot.add_view(views.JoinCampaignButton())
+    # getserverstatus.start(bot.get_guild(602809092049862686))
     # await bot.change_presence(activity=BOT_ACTIVITY)
+    #
 
 
 @tasks.loop(minutes=5)
@@ -91,7 +93,7 @@ async def getserverstatus(guild):
         await operationsserverchannel.edit(name=operationsserver)
 
 
-async def playerlogger(ctx):
+async def playerlogger(ctx: commands.Context):
     channel = bot.get_channel(BOT_LOG_CHANNEL_ID)
     timestamp = ctx.message.created_at.astimezone(BOT_TIMEZONE)
     em = discord.Embed()
@@ -110,7 +112,7 @@ async def playerlogger(ctx):
 
 
 @bot.event
-async def on_member_join(ctx):
+async def on_member_join(ctx: commands.Context):
     await ctx.member.roles.add(992820081602088981)
 
     # await DB.adduser(ctx.id, ctx.name)
@@ -118,6 +120,22 @@ async def on_member_join(ctx):
 # @bot.command(name='getusers')
 # async def get_users(ctx):
 #     await ctx.send(await DB.getUsers())
+
+
+@bot.command()
+@commands.has_any_role('Operation Designer')
+async def createcampaign(ctx: commands.Context, campaign_name: str):
+    view = views.ConfirmView()
+    message = await ctx.send('Are you sure you want to create a new campaign in this thread?', view=view)
+    await view.wait()
+    if view.value:
+        newrole = discord.utils.get(ctx.guild.roles, name=campaign_name)
+        if newrole is None:
+            newrole = await ctx.guild.create_role(name=campaign_name)
+        buttonview = views.CampaignButtonView(newrole)
+        await ctx.send(view=buttonview)
+        bot.add_view(buttonview)
+    await message.delete(delay=1)
 
 
 # @bot.command(name='getuserinfo')
@@ -214,7 +232,7 @@ async def createcoc(ctx):
 
 @bot.command()
 @commands.has_any_role(Director, AsstDirector)
-async def startserver(ctx):
+async def startserver(ctx: commands.Context):
     await ctx.send('Attempting to start server, please wait...')
     send_magic_packet(LAN_WAKEUP_CODE)
 
@@ -222,7 +240,7 @@ async def startserver(ctx):
 @bot.command()
 @commands.has_any_role(Director)
 @commands.after_invoke(playerlogger)
-async def rankup(ctx, member: discord.Member):
+async def rankup(ctx: commands.Context, member: discord.Member):
     # myguild = ctx.guild
     # guildroles = await myguild.fetch_roles()
     member_roles = member.roles
@@ -256,7 +274,7 @@ async def rankup(ctx, member: discord.Member):
 # @commands.cooldown(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, ADDUSER_COOLDOWN_PERIOD, DISCORD_BUCKETTYPE_GUILD)
 @commands.max_concurrency(ADDUSER_MAX_ATTEMPTS_PER_PERIOD, per=DISCORD_BUCKETTYPE_GUILD, wait=True)
 @commands.after_invoke(playerlogger)
-async def adduser(ctx, member: discord.Member):
+async def adduser(ctx: commands.Context, member: discord.Member):
     """Adds user to the unit. Args: <User Mention or ID>"""
     view = views.ConfirmView()
     await ctx.send_message(f'Confirmation to add {member.display_name} to the unit', view=view)
@@ -292,7 +310,7 @@ async def adduser(ctx, member: discord.Member):
 
 
 @bot.event
-async def on_command_error(ctx, error):
+async def on_command_error(ctx: commands.Context, error):
     if isinstance(error, commands.UserInputError):
         await ctx.send(error)
     if isinstance(error, commands.CommandOnCooldown):
