@@ -66,9 +66,7 @@ async def on_ready():
     print(output)
     print('-' * len(output))
     # bot.add_view(views.JoinCampaignButton())
-    # getserverstatus.start(bot.get_guild(602809092049862686))
-    # await bot.change_presence(activity=BOT_ACTIVITY)
-    #
+    getserverstatus.start(bot.get_guild(602809092049862686))
 
 
 @tasks.loop(minutes=5)
@@ -123,7 +121,7 @@ async def on_member_join(ctx: commands.Context):
 
 
 @bot.command()
-@commands.has_any_role('Operation Designer')
+@commands.has_any_role('Operation Designer', 'Director', 'Assistant Director')
 async def createcampaign(ctx: commands.Context, campaign_name: str):
     view = views.ConfirmView()
     message = await ctx.send('Are you sure you want to create a new campaign in this thread?', view=view)
